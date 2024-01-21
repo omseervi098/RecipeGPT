@@ -1,0 +1,178 @@
+.statistics {
+  width: 100%;
+  background-color: var(--quaternary-color);
+}
+
+.statistics__container {
+  width: 75%;
+  margin: auto;
+  position: relative;
+}
+
+@media screen and (max-width: 1100px) {
+  .statistics .statistics__container {
+    width: 90%;
+  }
+}
+
+.statistics .statistics__container .text__content__advanced {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.statistics .statistics__container .text__content__advanced h2 {
+  font-size: 40px;
+  color: #232127;
+}
+
+@media screen and (max-width: 550px) {
+  .statistics .statistics__container .text__content__advanced h2 {
+    text-align: center;
+  }
+}
+
+.statistics .statistics__container .text__content__advanced p {
+  padding-top: 10px;
+  color: #878787;
+  text-align: center;
+  width: 45%;
+}
+
+@media screen and (max-width: 550px) {
+  .statistics .statistics__container .text__content__advanced p {
+    width: auto;
+  }
+}
+
+.statistics .statistics__container .statistics__dashboard {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+}
+
+.statistics .statistics__container .statistics__dashboard .blue__line {
+  display: block;
+  width: 100%;
+  height: 10px;
+  background-color: #2acfcf;
+  position: absolute;
+  top: 50%;
+}
+
+@media screen and (max-width: 1000px) {
+  .statistics .statistics__container .statistics__dashboard .blue__line {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .statistics .statistics__container .statistics__dashboard .blue__line {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .statistics .statistics__container .statistics__dashboard {
+    -ms-grid-rows: auto !important;
+    grid-template-rows: auto !important;
+    -ms-grid-columns: auto;
+    grid-template-columns: auto;
+    grid-gap: 70px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .statistics .statistics__container .statistics__dashboard {
+    -ms-grid-columns: auto;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, 300px);
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+.statistics .statistics__container .statistics__dashboard .statistics__item {
+  background-color: #fff;
+  padding: 80px 40px 40px 40px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.statistics
+  .statistics__container
+  .statistics__dashboard
+  .statistics__item
+  .icon__container {
+  background-color: #3b3054;
+  padding: 20px;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  top: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.statistics
+  .statistics__container
+  .statistics__dashboard
+  .statistics__item
+  .icon__container
+  .icon
+  img {
+  height: 100%;
+  width: 100%;
+}
+
+.statistics .statistics__container .statistics__dashboard .statistics__item h3 {
+  font-size: 25px;
+  color: #232127;
+}
+
+.statistics .statistics__container .statistics__dashboard .statistics__item p {
+  padding-top: 25px;
+  color: #9e9aa7;
+}
+
+.statistics .statistics__container .statistics__dashboard .recognition {
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+
+.statistics .statistics__container .statistics__dashboard .records {
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+}
+
+.statistics .statistics__container .statistics__dashboard .customizable {
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  margin-top: 120px;
+}
+
+@media screen and (max-width: 550px) {
+  .statistics .statistics__container .statistics__dashboard .customizable {
+    margin: auto;
+  }
+}
