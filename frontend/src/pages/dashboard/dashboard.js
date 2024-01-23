@@ -95,7 +95,7 @@ const Dashboard = (props) => {
                     ⏲️{" "}
                     {instanceDetails.time > 115
                       ? instanceDetails.time + "+"
-                      : 5}{" "}
+                      : instanceDetails.time}{" "}
                     mins
                   </h4>
                   <Slider
