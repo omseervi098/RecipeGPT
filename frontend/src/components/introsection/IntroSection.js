@@ -2,7 +2,9 @@ import React from "react";
 import Chef from "../../asset/images/undraw_chef_cu-0-r.svg";
 import { Card } from "react-bootstrap";
 import Style from "./introsection.module.css";
+import { useAuth } from "../../context/authcontext";
 const IntroSection = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <div className={`${Style.introsection} py-5`}>
       <section className="container">
@@ -13,7 +15,10 @@ const IntroSection = () => {
               RecipeGPT is a recipe search engine that levarages the power of AI
               to generate personalized recipes based on your preferences.
             </p>
-            <a className="main__button text-decoration-none mt-4" href="/login">
+            <a
+              className="main__button text-decoration-none mt-4"
+              href={isAuthenticated ? "/dashboard" : "/login"}
+            >
               Get Started
             </a>
           </div>

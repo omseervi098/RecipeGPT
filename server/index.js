@@ -16,7 +16,6 @@ app.use(cors());
 app.options("*", cors());
 // Use middleware
 app.use(apiContent);
-app.use(allowCrossDomain);
 
 // Use common 3rd-party middlewares
 app.use(express.json({ limit: "50mb" }));
