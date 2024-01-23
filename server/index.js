@@ -6,12 +6,14 @@ import { jwtStrategy } from "./config/passport.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
 import { apiContent } from "./middlewares/apiContentType.js";
+import { allowCrossDomain } from "./middlewares/allowCrossDomain.js";
 import db from "./config/mongoose.js";
 dotenv.config({ path: ".env" });
 const app = express();
 
 // Use middleware
 app.use(apiContent);
+app.use(allowCrossDomain);
 
 //Allow CORS
 app.use(cors());
