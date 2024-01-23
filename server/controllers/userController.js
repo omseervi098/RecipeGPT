@@ -74,7 +74,8 @@ export const loginUser = async (req, res, next) => {
           expiresIn: "1d",
         }
       );
-      res.status(200).json({
+      res.headers("Access-Control-Allow-Origin", "*");
+      return res.status(200).json({
         token: loginToken,
         user: {
           id: user._id,
