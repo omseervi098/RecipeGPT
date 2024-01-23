@@ -1,0 +1,31 @@
+.detail_input {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.detail_input_label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-right: 1rem;
+}
+.detail_value {
+  font-size: 1.5rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+
+  overflow: scroll;
+  background-color: var(--tertiary-color);
+}
+@media screen and (max-width: 576px) {
+  .detail_value {
+    width: 60%;
+    font-size: 1.2rem;
+  }
+  .detail_input_label {
+    width: 40%;
+    font-size: 1.2rem;
+  }
+}

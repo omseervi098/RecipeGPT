@@ -1,0 +1,930 @@
+[
+    {
+        "name": "Adzuki beans",
+        "icon": "🌱"
+    },
+    {
+        "name": "Agave nectar",
+        "icon": "🍯"
+    },
+    {
+        "name": "Allspice",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Almond flour",
+        "icon": "🌰"
+    },
+    {
+        "name": "Almonds",
+        "icon": "🥜"
+    },
+    {
+        "name": "Amaranth",
+        "icon": "🌾"
+    },
+    {
+        "name": "Anchovies",
+        "icon": "🐟"
+    },
+    {
+        "name": "Angel hair pasta",
+        "icon": "🍝"
+    },
+    {
+        "name": "Apricots",
+        "icon": "🍑"
+    },
+    {
+        "name": "Arrowroot",
+        "icon": "🎯"
+    },
+    {
+        "name": "Arroz negro",
+        "icon": "🍚"
+    },
+    {
+        "name": "Arugula",
+        "icon": "🌿"
+    },
+    {
+        "name": "Avocado oil",
+        "icon": "🥑"
+    },
+    {
+        "name": "Bacon",
+        "icon": "🥓"
+    },
+    {
+        "name": "Baking powder",
+        "icon": "🥄"
+    },
+    {
+        "name": "Baking soda",
+        "icon": "🥄"
+    },
+    {
+        "name": "Barley",
+        "icon": "🌾"
+    },
+    {
+        "name": "Basmati rice",
+        "icon": "🍚"
+    },
+    {
+        "name": "Bay leaves",
+        "icon": "🌿"
+    },
+    {
+        "name": "Beets",
+        "icon": "🍆"
+    },
+    {
+        "name": "Black beans",
+        "icon": "🖤"
+    },
+    {
+        "name": "Blueberries",
+        "icon": "🫐"
+    },
+    {
+        "name": "Bok choy",
+        "icon": "🥬"
+    },
+    {
+        "name": "Brown rice",
+        "icon": "🍚"
+    },
+    {
+        "name": "Bulgur",
+        "icon": "🌾"
+    },
+    {
+        "name": "Butter beans",
+        "icon": "🧈"
+    },
+    {
+        "name": "Buttermilk",
+        "icon": "🥛"
+    },
+    {
+        "name": "Butternut squash",
+        "icon": "🎃"
+    },
+    {
+        "name": "Cantaloupe",
+        "icon": "🍈"
+    },
+    {
+        "name": "Capers",
+        "icon": "🌿"
+    },
+    {
+        "name": "Capsicum",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Cardamom",
+        "icon": "🌱"
+    },
+    {
+        "name": "Carrots",
+        "icon": "🥕"
+    },
+    {
+        "name": "Cashews",
+        "icon": "🌰"
+    },
+    {
+        "name": "Cauliflower",
+        "icon": "🥦"
+    },
+    {
+        "name": "Cayenne pepper",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Celeriac",
+        "icon": "🌿"
+    },
+    {
+        "name": "Celery",
+        "icon": "🌿"
+    },
+    {
+        "name": "hai tea",
+        "icon": "☕"
+    },
+    {
+        "name": "Chamomile",
+        "icon": "🌼"
+    },
+    {
+        "name": "Cherries",
+        "icon": "🍒"
+    },
+    {
+        "name": "Chia seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Chickpeas",
+        "icon": "🌱"
+    },
+    {
+        "name": "Chives",
+        "icon": "🌿"
+    },
+    {
+        "name": "Cilantro",
+        "icon": "🌿"
+    },
+    {
+        "name": "Cinnamon",
+        "icon": "🌳"
+    },
+    {
+        "name": "Citric acid",
+        "icon": "🍋"
+    },
+    {
+        "name": "Clams",
+        "icon": "🐚"
+    },
+    {
+        "name": "Clarified butter",
+        "icon": "🧈"
+    },
+    {
+        "name": "Cloves",
+        "icon": "🌳"
+    },
+    {
+        "name": "Cocoa powder",
+        "icon": "🍫"
+    },
+    {
+        "name": "Coconut cream",
+        "icon": "🥥"
+    },
+    {
+        "name": "Coconut milk",
+        "icon": "🥥"
+    },
+    {
+        "name": "Cod",
+        "icon": "🐟"
+    },
+    {
+        "name": "Collard greens",
+        "icon": "🥬"
+    },
+    {
+        "name": "Cornmeal",
+        "icon": "🌽"
+    },
+    {
+        "name": "Cornstarch",
+        "icon": "🌽"
+    },
+    {
+        "name": "Corn tortillas",
+        "icon": "🌽"
+    },
+    {
+        "name": "Crab",
+        "icon": "🦀"
+    },
+    {
+        "name": "Cranberries",
+        "icon": "🍒"
+    },
+    {
+        "name": "Cranberry sauce",
+        "icon": "🍒"
+    },
+    {
+        "name": "Crawfish",
+        "icon": "🦞"
+    },
+    {
+        "name": "Cream",
+        "icon": "🥛"
+    },
+    {
+        "name": "Cream of tartar",
+        "icon": "🥄"
+    },
+    {
+        "name": "Crème fraîche",
+        "icon": "🥛"
+    },
+    {
+        "name": "Cumin",
+        "icon": "🌱"
+    },
+    {
+        "name": "Curry powder",
+        "icon": "🍛"
+    },
+    {
+        "name": "Dates",
+        "icon": "🌴"
+    },
+    {
+        "name": "Dill",
+        "icon": "🌿"
+    },
+    {
+        "name": "Eggplant",
+        "icon": "🍆"
+    },
+    {
+        "name": "Fennel",
+        "icon": "🌿"
+    },
+    {
+        "name": "Fennel seeds",
+        "icon": "🌿"
+    },
+    {
+        "name": "Fenugreek",
+        "icon": "🌱"
+    },
+    {
+        "name": "Feta cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Figs",
+        "icon": "🌰"
+    },
+    {
+        "name": "Fish sauce",
+        "icon": "🐟"
+    },
+    {
+        "name": "Five-spice powder",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Flaxseeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Flour",
+        "icon": "🌾"
+    },
+    {
+        "name": "Fusilli pasta",
+        "icon": "🍝"
+    },
+    {
+        "name": "Galangal",
+        "icon": "🌱"
+    },
+    {
+        "name": "Garam masala",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Garlic",
+        "icon": "🧄"
+    },
+    {
+        "name": "Ginger",
+        "icon": "🌱"
+    },
+    {
+        "name": "Gorgonzola cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Gouda cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Graham flour",
+        "icon": "🌾"
+    },
+    {
+        "name": "Grapefruit",
+        "icon": "🍊"
+    },
+    {
+        "name": "Grapes",
+        "icon": "🍇"
+    },
+    {
+        "name": "Grapeseed oil",
+        "icon": "🥑"
+    },
+    {
+        "name": "Greek yogurt",
+        "icon": "🥛"
+    },
+    {
+        "name": "Green beans",
+        "icon": "🌱"
+    },
+    {
+        "name": "Green onions",
+        "icon": "🌿"
+    },
+    {
+        "name": "Guavas",
+        "icon": "🍈"
+    },
+    {
+        "name": "Ham",
+        "icon": "🍖"
+    },
+    {
+        "name": "Hazelnuts",
+        "icon": "🌰"
+    },
+    {
+        "name": "Honey",
+        "icon": "🍯"
+    },
+    {
+        "name": "Horseradish",
+        "icon": "🌱"
+    },
+    {
+        "name": "Iceberg lettuce",
+        "icon": "🥬"
+    },
+    {
+        "name": "Jalapeños",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Jasmine rice",
+        "icon": "🍚"
+    },
+    {
+        "name": "Juniper berries",
+        "icon": "🌿"
+    },
+    {
+        "name": "Kaffir lime leaves",
+        "icon": "🍃"
+    },
+    {
+        "name": "Kale",
+        "icon": "🥬"
+    },
+    {
+        "name": "Kidney beans",
+        "icon": "🍛"
+    },
+    {
+        "name": "Kimchi",
+        "icon": "🥬"
+    },
+    {
+        "name": "Kiwi",
+        "icon": "🥝"
+    },
+    {
+        "name": "Lard",
+        "icon": "🐖"
+    },
+    {
+        "name": "Lavender",
+        "icon": "🌸"
+    },
+    {
+        "name": "Lemon balm",
+        "icon": "🍋"
+    },
+    {
+        "name": "Lemongrass",
+        "icon": "🌿"
+    },
+    {
+        "name": "Lentils",
+        "icon": "🍲"
+    },
+    {
+        "name": "Lime juice",
+        "icon": "🍈"
+    },
+    {
+        "name": "Lime zest",
+        "icon": "🍋"
+    },
+    {
+        "name": "Linguine pasta",
+        "icon": "🍝"
+    },
+    {
+        "name": "Lobster",
+        "icon": "🦞"
+    },
+    {
+        "name": "Loganberries",
+        "icon": "🍇"
+    },
+    {
+        "name": "Macadamia nuts",
+        "icon": "🌰"
+    },
+    {
+        "name": "Macaroni pasta",
+        "icon": "🍝"
+    },
+    {
+        "name": "Mace",
+        "icon": "🌿"
+    },
+    {
+        "name": "Mangoes",
+        "icon": "🥭"
+    },
+    {
+        "name": "Maple syrup",
+        "icon": "🍁"
+    },
+    {
+        "name": "Marjoram",
+        "icon": "🌿"
+    },
+    {
+        "name": "Mascarpone cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Matcha powder",
+        "icon": "🍵"
+    },
+    {
+        "name": "Mayonnaise",
+        "icon": "🥚"
+    },
+    {
+        "name": "Milk",
+        "icon": "🥛"
+    },
+    {
+        "name": "Mint",
+        "icon": "🌱"
+    },
+    {
+        "name": "Miso",
+        "icon": "🍱"
+    },
+    {
+        "name": "Molasses",
+        "icon": "🍯"
+    },
+    {
+        "name": "Mozzarella cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Mung beans",
+        "icon": "🌱"
+    },
+    {
+        "name": "Mushrooms",
+        "icon": "🍄"
+    },
+    {
+        "name": "Mussels",
+        "icon": "🦪"
+    },
+    {
+        "name": "Mustard",
+        "icon": "🌿"
+    },
+    {
+        "name": "Navy beans",
+        "icon": "🍛"
+    },
+    {
+        "name": "Nectarines",
+        "icon": "🍑"
+    },
+    {
+        "name": "Nori",
+        "icon": "🌿"
+    },
+    {
+        "name": "Nutmeg",
+        "icon": "🌰"
+    },
+    {
+        "name": "Oat flour",
+        "icon": "🌾"
+    },
+    {
+        "name": "Oats",
+        "icon": "🌾"
+    },
+    {
+        "name": "Octopus",
+        "icon": "🐙"
+    },
+    {
+        "name": "Okra",
+        "icon": "🌿"
+    },
+    {
+        "name": "Olives",
+        "icon": "🫒"
+    },
+    {
+        "name": "Onions",
+        "icon": "🧅"
+    },
+    {
+        "name": "Oranges",
+        "icon": "🍊"
+    },
+    {
+        "name": "Oregano",
+        "icon": "🌿"
+    },
+    {
+        "name": "Oysters",
+        "icon": "🦪"
+    },
+    {
+        "name": "Pancetta",
+        "icon": "🥓"
+    },
+    {
+        "name": "Panko bread crumbs",
+        "icon": "🍞"
+    },
+    {
+        "name": "Papaya",
+        "icon": "🥭"
+    },
+    {
+        "name": "Paprika",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Parmesan cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Parsley",
+        "icon": "🌿"
+    },
+    {
+        "name": "Passion fruit",
+        "icon": "🍋"
+    },
+    {
+        "name": "Peaches",
+        "icon": "🍑"
+    },
+    {
+        "name": "Peanut butter",
+        "icon": "🥜"
+    },
+    {
+        "name": "Peanuts",
+        "icon": "🥜"
+    },
+    {
+        "name": "Pears",
+        "icon": "🍐"
+    },
+    {
+        "name": "Peas",
+        "icon": "🌱"
+    },
+    {
+        "name": "Pecans",
+        "icon": "🌰"
+    },
+    {
+        "name": "Penne pasta",
+        "icon": "🍝"
+    },
+    {
+        "name": "Peppers",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Pineapple",
+        "icon": "🍍"
+    },
+    {
+        "name": "Pine nuts",
+        "icon": "🌰"
+    },
+    {
+        "name": "Pinto beans",
+        "icon": "🍛"
+    },
+    {
+        "name": "Pistachios",
+        "icon": "🌰"
+    },
+    {
+        "name": "Plums",
+        "icon": "🍑"
+    },
+    {
+        "name": "Polenta",
+        "icon": "🌽"
+    },
+    {
+        "name": "Pomegranates",
+        "icon": "🍎"
+    },
+    {
+        "name": "Popeye",
+        "icon": "🌿"
+    },
+    {
+        "name": "Poppy seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Potatoes",
+        "icon": "🥔"
+    },
+    {
+        "name": "Pumpkin",
+        "icon": "🎃"
+    },
+    {
+        "name": "Pumpkin seeds",
+        "icon": "🎃"
+    },
+    {
+        "name": "Quinoa",
+        "icon": "🌾"
+    },
+    {
+        "name": "Raisins",
+        "icon": "🍇"
+    },
+    {
+        "name": "Raspberries",
+        "icon": "🍓"
+    },
+    {
+        "name": "Red pepper flakes",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Rice",
+        "icon": "🍚"
+    },
+    {
+        "name": "Rice noodles",
+        "icon": "🍜"
+    },
+    {
+        "name": "Ricotta cheese",
+        "icon": "🧀"
+    },
+    {
+        "name": "Rosemary",
+        "icon": "🌿"
+    },
+    {
+        "name": "Rye flour",
+        "icon": "🌾"
+    },
+    {
+        "name": "Sage",
+        "icon": "🌿"
+    },
+    {
+        "name": "Salmon",
+        "icon": "🐟"
+    },
+    {
+        "name": "Salt",
+        "icon": "🧂"
+    },
+    {
+        "name": "Sauerkraut",
+        "icon": "🥬"
+    },
+    {
+        "name": "Savory",
+        "icon": "🌿"
+    },
+    {
+        "name": "Scallions",
+        "icon": "🌱"
+    },
+    {
+        "name": "Scallops",
+        "icon": "🦪"
+    },
+    {
+        "name": "Sea salt",
+        "icon": "🧂"
+    },
+    {
+        "name": "Sesame oil",
+        "icon": "🌱"
+    },
+    {
+        "name": "Sesame seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Shallots",
+        "icon": "🧅"
+    },
+    {
+        "name": "Shortening",
+        "icon": "🌱"
+    },
+    {
+        "name": "Shrimp",
+        "icon": "🦐"
+    },
+    {
+        "name": "Sour cream",
+        "icon": "🥛"
+    },
+    {
+        "name": "Soy sauce",
+        "icon": "🌱"
+    },
+    {
+        "name": "Spaghetti pasta",
+        "icon": "🍝"
+    },
+    {
+        "name": "Spinach",
+        "icon": "🥬"
+    },
+    {
+        "name": "Squash",
+        "icon": "🎃"
+    },
+    {
+        "name": "Squid",
+        "icon": "🦑"
+    },
+    {
+        "name": "Sriracha sauce",
+        "icon": "🌶️"
+    },
+    {
+        "name": "tar anise",
+        "icon": "⭐"
+    },
+    {
+        "name": "Strawberries",
+        "icon": "🍓"
+    },
+    {
+        "name": "Sugar",
+        "icon": "🍚"
+    },
+    {
+        "name": "Sun-dried tomatoes",
+        "icon": "🍅"
+    },
+    {
+        "name": "Sunflower seeds",
+        "icon": "🌻"
+    },
+    {
+        "name": "Sweet potatoes",
+        "icon": "🍠"
+    },
+    {
+        "name": "Swiss chard",
+        "icon": "🌿"
+    },
+    {
+        "name": "Tangerines",
+        "icon": "🍊"
+    },
+    {
+        "name": "Tapioca",
+        "icon": "🌾"
+    },
+    {
+        "name": "Tarragon",
+        "icon": "🌿"
+    },
+    {
+        "name": "Tea",
+        "icon": "🍵"
+    },
+    {
+        "name": "Thyme",
+        "icon": "🌿"
+    },
+    {
+        "name": "Tofu",
+        "icon": "🌱"
+    },
+    {
+        "name": "Tomatoes",
+        "icon": "🍅"
+    },
+    {
+        "name": "Truffles",
+        "icon": "🍄"
+    },
+    {
+        "name": "Turmeric",
+        "icon": "🌿"
+    },
+    {
+        "name": "Vanilla extract",
+        "icon": "🌿"
+    },
+    {
+        "name": "Vegetable oil",
+        "icon": "🌱"
+    },
+    {
+        "name": "Vinegar",
+        "icon": "🌿"
+    },
+    {
+        "name": "Walnuts",
+        "icon": "🌰"
+    },
+    {
+        "name": "Wasabi",
+        "icon": "🌱"
+    },
+    {
+        "name": "Watermelon",
+        "icon": "🍉"
+    },
+    {
+        "name": "White wine",
+        "icon": "🍷"
+    },
+    {
+        "name": "Whole wheat flour",
+        "icon": "🌾"
+    },
+    {
+        "name": "Wild rice",
+        "icon": "🌾"
+    },
+    {
+        "name": "Worcestershire sauce",
+        "icon": "🌿"
+    },
+    {
+        "name": "Yeast",
+        "icon": "🌾"
+    },
+    {
+        "name": "Yogurt",
+        "icon": "🥛"
+    }
+]

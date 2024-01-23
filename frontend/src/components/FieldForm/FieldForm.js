@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-const Field = ({ placeholder, input, source, type }) => {
+import style from "./FieldForm.module.css";
+const Field = ({ placeholder, input, name, source, type }) => {
   return (
-    <div className="input__container">
-      <div className="input__container w-100">
+    <div className={`${style.input__container}`}>
+      <div className={`${style.input__container} `}>
         <input
           type={type}
           placeholder={placeholder}
           autoComplete="off"
+          name={name}
           {...input}
         />
-        <div className="icon__input d-none d-sm-block">
+        <div className={`${style.icon__input} d-none d-sm-block`}>
           <FontAwesomeIcon
             icon={source}
             style={{

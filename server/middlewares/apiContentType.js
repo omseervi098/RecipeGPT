@@ -5,7 +5,6 @@ export const apiContent = function (req, res, next) {
         message: "Content-Type must be application/json",
       });
     } else {
-      console.log(req);
       next();
     }
   } else {
