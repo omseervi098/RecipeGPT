@@ -74,7 +74,8 @@ export const loginUser = async (req, res, next) => {
           expiresIn: "1d",
         }
       );
-      res.headers("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
       return res.status(200).json({
         token: loginToken,
         user: {

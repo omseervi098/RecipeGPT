@@ -11,12 +11,12 @@ import db from "./config/mongoose.js";
 dotenv.config({ path: ".env" });
 const app = express();
 
+//Allow CORS
+app.use(cors());
+app.options("*", cors());
 // Use middleware
 app.use(apiContent);
 app.use(allowCrossDomain);
-
-//Allow CORS
-app.use(cors());
 
 // Use common 3rd-party middlewares
 app.use(express.json({ limit: "50mb" }));
