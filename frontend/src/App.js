@@ -20,6 +20,7 @@ import Footer from "./components/footer/footer";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import { useAuth } from "./context/authcontext";
+import ForgetPassword from "./pages/forgetPass/forgetPass";
 
 config.autoAddCss = false;
 
@@ -43,6 +44,16 @@ function App() {
             path="/signup"
             element={
               isAuthenticated() ? <Navigate to="/dashboard" /> : <SignUp />
+            }
+          ></Route>
+          <Route
+            path="/forget-password"
+            element={
+              isAuthenticated() ? (
+                <Navigate to="/dashboard" />
+              ) : (
+                <ForgetPassword />
+              )
             }
           ></Route>
           <Route

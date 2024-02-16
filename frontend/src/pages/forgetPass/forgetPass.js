@@ -1,7 +1,7 @@
 import React from "react";
 //imoprting components
 //importing styles
-import "./login.css";
+import "./forgetPass.css";
 //importing link from react router
 import { Link, redirect, useNavigate } from "react-router-dom";
 import LoginImg from "../../asset/images/login.svg";
@@ -15,7 +15,7 @@ import { useAuth } from "../../context/authcontext";
 import Footer from "../../components/footer/footer";
 
 //login component
-const Login = () => {
+const ForgetPassword = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   //rendering errors
@@ -49,16 +49,10 @@ const Login = () => {
                 <img src={LoginImg} alt="login" />
               </div>
               <div className="text__content">
-                <div className="social__media w-100 ">
-                  <div
-                    className="main__button px-3"
-                    onClick={() => loginWithGoogle()}
-                  >
-                    <FontAwesomeIcon icon={faGoogle} size={"2x"} />{" "}
-                    &nbsp;Continue with Google
-                  </div>
+                <div className="text-center w-100 ">
+                  Forgot Password ? No worries, we got you covered
                 </div>
-                <p>or use your email account:</p>
+                <p>Enter Your Email account:</p>
                 <form onSubmit={handleLogin} className="">
                   <Field
                     name="email"
@@ -67,24 +61,10 @@ const Login = () => {
                     type="email"
                     source={faEnvelope}
                   />
-                  <Field
-                    name="password"
-                    component={Field}
-                    placeholder="Password"
-                    type="password"
-                    source={faKey}
-                  />
-                  <Link className="forgot__password " to="/forget-password">
-                    Forgot your password?
-                  </Link>
-                  <button className="main__button mx-auto px-3">Login</button>
+                  <button className="main__button mx-auto px-3 my-2">
+                    Submit
+                  </button>
                 </form>
-                <div className="not__a__member mt-0">
-                  <p>Not a member?</p>
-                  <Link to="/signup" className="sign__up__now">
-                    Signup now
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
@@ -94,4 +74,4 @@ const Login = () => {
     </>
   );
 };
-export default Login;
+export default ForgetPassword;

@@ -1,0 +1,361 @@
+.login__page {
+  margin: auto;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    70deg,
+    var(--bs-white) 0%,
+    var(--quaternary-color) 100%
+  );
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1100px) {
+  .login__page {
+    background: var(--secondary-color) !important;
+  }
+}
+
+.login__page .wrapper {
+  margin: auto;
+  min-width: 250px;
+  max-width: 1600px;
+  width: 75%;
+}
+
+@media screen and (max-width: 1100px) {
+  .login__page .wrapper {
+    width: 90%;
+  }
+}
+
+.login__page .wrapper .login__card {
+  background-color: #fff;
+  -webkit-box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.login__page .wrapper .login__card .login__card__container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto;
+  grid-template-rows: auto;
+  min-height: 70vh;
+  margin: auto;
+}
+
+@media screen and (max-width: 1100px) {
+  .login__page .wrapper .login__card .login__card__container {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .login__page .wrapper .login__card .login__card__container {
+    min-height: 80vh;
+  }
+}
+
+.login__page .wrapper .login__card .login__card__container .illustration {
+  -ms-grid-column: 2;
+  grid-column-start: 2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  background-color: var(--secondary-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.login__page .wrapper .login__card .login__card__container .illustration img {
+  width: 95%;
+}
+
+@media screen and (max-width: 1100px) {
+  .login__page .wrapper .login__card .login__card__container .illustration {
+    display: none;
+  }
+}
+
+.login__page .wrapper .login__card .login__card__container .text__content {
+  position: relative;
+  -ms-grid-column: 1;
+  grid-column-start: 1;
+  color: #3b3054;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 95%;
+}
+
+@media screen and (max-width: 1100px) {
+  .login__page .wrapper .login__card .login__card__container .text__content {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    margin: auto;
+  }
+}
+
+.login__page .wrapper .login__card .login__card__container .text__content h1 {
+  margin: 40px auto 10px auto;
+  text-align: center;
+  font-size: 45px;
+  color: #3b3054;
+}
+
+@media screen and (max-width: 600px) {
+  .login__page .wrapper .login__card .login__card__container .text__content h1 {
+    font-size: 38px;
+    width: 95%;
+  }
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .social__media {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 180px;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .social__media
+  .icon {
+  border-radius: 50%;
+  border: 1px solid #c2c1c1;
+  padding: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .social__media
+  .icon:hover {
+  background-color: #3b3054;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .social__media
+  .icon:hover
+  i {
+  color: #fff;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .social__media
+  .icon
+  i {
+  color: #3b3054;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .social__media
+  .facebook__icon {
+  padding: 12px 15px;
+}
+
+.login__page .wrapper .login__card .login__card__container .text__content p {
+  margin: 10px auto;
+}
+
+.login__page .wrapper .login__card .login__card__container .text__content form {
+  text-align: center;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  form
+  .forgot__password {
+  text-decoration: none;
+  padding: 10px 0;
+  color: var(--secondary-color);
+  line-height: 3.2;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  form
+  .login__button {
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #fff;
+  outline: 0;
+  border: 0;
+  background-color: #3b3054;
+  list-style: none;
+  width: 220px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 30px;
+  margin: 20px auto;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  form
+  .login__button:hover {
+  opacity: 0.7;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .not__a__member {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .not__a__member
+  p {
+  padding: 0 10px;
+}
+
+.login__page
+  .wrapper
+  .login__card
+  .login__card__container
+  .text__content
+  .not__a__member
+  .sign__up__now {
+  color: #3b3054;
+}
+
+@media screen and (max-width: 1100px) {
+  .login__page
+    .wrapper
+    .login__card
+    .login__card__container
+    .text__content
+    .not__a__member {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+/*# sourceMappingURL=login.css.map */
