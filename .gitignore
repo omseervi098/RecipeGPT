@@ -6,9 +6,9 @@
 /client/.env
 /client/src/environment.js
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+/Flask/env
+/Flask/df_new_emb.pkl
 
-
-
-
+*.pkl
 
 

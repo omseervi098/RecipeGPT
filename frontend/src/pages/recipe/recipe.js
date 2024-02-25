@@ -1,0 +1,249 @@
+import React, { useEffect } from "react";
+import { useRecipe } from "../../context/recipecontext";
+import { Sidebar } from "primereact/sidebar";
+import { useAuth } from "../../context/authcontext";
+import { Divider } from "primereact/divider";
+import { Button } from "primereact/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClockRotateLeft,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { Card, Modal } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import { Rating } from "primereact/rating";
+
+export default function Recipe() {
+  const { recipe, instancedetails, rating, previousRecipes } = useRecipe();
+  const params = useParams();
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(recipe, instancedetails, rating, previousRecipes, params.id);
+  }, []);
+  const [visible, setVisible] = React.useState(false);
+  const [ratingValue, setRatingValue] = React.useState(null);
+  const [modalShow, setModalShow] = React.useState(false);
+  return (
+    <div className="recipe py-5">
+      <div className="container pb-5 pt-3">
+        <div className="row mb-2 mb-sm-4">
+          <div className="col-12">
+            <div className="float-start">
+              <h2 className="fw-bold">
+                Welcome, <span className="fw-bold">{user.name}</span>{" "}
+              </h2>
+              <p className="text-muted">
+                Welcome to your dashboard. Here you can generate recipes based
+                on your preferences.
+              </p>
+            </div>
+            <div className="float-end">
+              <Sidebar visible={visible} onHide={() => setVisible(false)}>
+                <h2>Previous Recipes</h2>
+                <p className="text-muted">
+                  Here you can see the recipes you have generated previously.
+                </p>
+                <div className="d-flex flex-column justify-content-center">
+                  {previousRecipes.map((recipe, index) => {
+                    return (
+                      <>
+                        <Divider />
+                        <p
+                          key={index}
+                          className="text-muted"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            navigate("/recipe/" + recipe.recipe.id);
+                            setVisible(false);
+                          }}
+                        >
+                          {recipe.recipe.title}
+                        </p>
+                      </>
+                    );
+                  })}
+                </div>
+              </Sidebar>
+              <Button
+                onClick={() => {
+                  setVisible(true);
+                }}
+                className="main__button px-3"
+              >
+                <FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;History
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="row justify-content-center py-4">
+          <div className="col-12 col-md-8">
+            <Card className="py-3 px-3 ">
+              {recipe === "No recipe found" ? (
+                <h4 className="fw-bold">No recipe found</h4>
+              ) : (
+                <>
+                  <h4 className="fw-bold">Your Recipe </h4>
+                  <p className="text-muted ">
+                    Here is the recipe generated based on your preferences.
+                  </p>
+                  <div className="py-3">
+                    <h4> {recipe.title}</h4>
+                    <p className="text-muted">
+                      <span className="fw-bold">Ingredients: </span>
+                      <div className="d-flex flex-column p-2">
+                        {recipe.ingredients.map((ingredient, index) => {
+                          return (
+                            <li key={index} className="px-2">
+                              {ingredient.replace('"', "")}
+                            </li>
+                          );
+                        })}
+                      </div>
+                    </p>
+                    <p className="text-muted">
+                      <span className="fw-bold">Directions: </span>
+                      <div className="d-flex flex-column p-2">
+                        {recipe.directions.map((direction, index) => {
+                          return (
+                            <li key={index} className="px-2">
+                              {direction.replace('"', "")}
+                            </li>
+                          );
+                        })}
+                      </div>
+                    </p>
+                  </div>
+                </>
+              )}
+            </Card>
+          </div>
+          <div className="col-12 d-none col-md-4 d-md-flex">
+            <Card className="py-3 px-3">
+              <h4 className="fw-bold">Requested Details</h4>
+              <p className="text-muted m-0">
+                Here are the details of the request you made for the recipe.
+              </p>
+              <div className="py-3">
+                <p className="text-muted m-0">
+                  <span className="fw-bold">Ingredients: </span>
+                  <div className="d-flex flex-column p-2 pb-0">
+                    {instancedetails.ingredients.map((ingredient, index) => {
+                      return (
+                        <p key={index} className="px-2">
+                          {ingredient.icon} {ingredient.name}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </p>
+                <p className="text-muted m-0">
+                  <span className="fw-bold">Allergies: </span>
+                  <div className="d-flex flex-column p-2 pb-0">
+                    {user.foodPreferences.allergies.map((allergy, index) => {
+                      return (
+                        <p key={index} className="px-2">
+                          {allergy.icon} {allergy.name}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </p>
+                <p className="text-muted m-0">
+                  <span className="fw-bold">Favorite Ingredients: </span>
+                  <div className="d-flex flex-column p-2 pb-0">
+                    {user.foodPreferences.favouriteIngredients.map(
+                      (ingredient, index) => {
+                        return (
+                          <p key={index} className="px-2">
+                            {ingredient.icon} {ingredient.name}
+                          </p>
+                        );
+                      }
+                    )}
+                  </div>
+                </p>
+                {instancedetails.cuisine && (
+                  <p className="text-muted">
+                    <span className="fw-bold">Cuisine: </span>
+                    {instancedetails.cuisine}
+                  </p>
+                )}
+                {instancedetails.dishType && (
+                  <p className="text-muted">
+                    <span className="fw-bold">Dish Type: </span>
+                    {instancedetails.dishType}
+                  </p>
+                )}
+                <p className="text-muted">
+                  <span className="fw-bold">Diet: </span>
+                  {user.foodPreferences.dietPreference}
+                </p>
+              </div>
+            </Card>
+          </div>
+          <div className="col-12 col-md-12">
+            <div className="d-flex justify-content-center">
+              <Button
+                className="main__button px-3 mt-3"
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
+              >
+                <FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;Generate
+                Another Recipe
+              </Button>
+              <Button
+                className="main__button px-3 mt-3 ms-3"
+                onClick={() => setModalShow(true)}
+              >
+                <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;Rate Recipe
+              </Button>
+            </div>
+          </div>
+          <Modal show={modalShow} onHide={() => setModalShow(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Rate {recipe.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p className="text-muted text-center mb-2">
+                Rate the recipe based on your experience.
+              </p>
+              <div className="d-flex justify-content-center">
+                <Rating
+                  value={ratingValue}
+                  onChange={(e) => setRatingValue(e.value)}
+                  onIcon={
+                    <img
+                      src="https://primefaces.org/cdn/primereact/images/rating/custom-icon-active.png"
+                      alt="custom"
+                      width="30px"
+                      height="30px"
+                    />
+                  }
+                  offIcon={
+                    <img
+                      src="https://primefaces.org/cdn/primereact/images/rating/custom-icon.png"
+                      alt="custom"
+                      width="30px"
+                      height="30px"
+                    />
+                  }
+                />
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                className="main__button px-3"
+                onClick={() => setModalShow(false)}
+              >
+                Save
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      </div>
+    </div>
+  );
+}

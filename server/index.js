@@ -5,6 +5,7 @@ import passport from "passport";
 import { jwtStrategy } from "./config/passport.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
+import recipeRouter from "./routes/recipeRouter.js";
 import { apiContent } from "./middlewares/apiContentType.js";
 import { allowCrossDomain } from "./middlewares/allowCrossDomain.js";
 import db from "./config/mongoose.js";
@@ -27,6 +28,7 @@ passport.use(jwtStrategy);
 // Auth Router
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/recipes", recipeRouter);
 
 app.get("/api/v1", (req, res) => {
   res.send("Hello World");

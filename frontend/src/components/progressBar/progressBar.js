@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ProgressBar } from "primereact/progressbar";
 import { toast } from "react-toastify";
 
-export default function Progressbar() {
+export default function Progressbar(props) {
   const [value, setValue] = useState(0);
   const interval = useRef(null);
 

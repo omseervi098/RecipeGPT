@@ -21,6 +21,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import { useAuth } from "./context/authcontext";
 import ForgetPassword from "./pages/forgetPass/forgetPass";
+import Recipe from "./pages/recipe/recipe";
 
 config.autoAddCss = false;
 
@@ -66,7 +67,10 @@ function App() {
             path="/profile"
             element={isAuthenticated() ? <Profile /> : <Navigate to="/login" />}
           ></Route>
-          <Route path="*" element={<Navigate to="/" />}></Route>
+          <Route
+            path="/recipe/:id"
+            element={isAuthenticated() ? <Recipe /> : <Navigate to="/login" />}
+          ></Route>
         </Routes>
       </Router>
     </div>

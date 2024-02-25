@@ -52,6 +52,10 @@
         "icon": "🥑"
     },
     {
+        "name": "Beef",
+        "icon": "🍖"
+    },
+    {
         "name": "Bacon",
         "icon": "🥓"
     },
@@ -210,6 +214,10 @@
     {
         "name": "Coconut milk",
         "icon": "🥥"
+    },
+    {
+        "name": "Chicken",
+        "icon": "🍗"
     },
     {
         "name": "Cod",
@@ -576,8 +584,16 @@
         "icon": "🫒"
     },
     {
-        "name": "Onions",
+        "name": "onion",
         "icon": "🧅"
+    },
+    {
+        "name": "Onion Powder",
+        "icon": "🧅"
+    },
+    {
+        "name": "diced onions",
+        "icon": "🍊"
     },
     {
         "name": "Oranges",

@@ -6,23 +6,56 @@ import DropdownwithSearch from "../../components/dropdown/dropdown";
 import { Button } from "primereact/button";
 import { Sidebar } from "primereact/sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/authcontext";
 import { Divider } from "primereact/divider";
 import { ProgressBar } from "primereact/progressbar";
 import CookingSVG from "../../asset/images/cooking.svg";
 import Progressbar from "../../components/progressBar/progressBar";
+import axios from "axios";
+import { useRecipe } from "../../context/recipecontext";
+import { Link, useNavigate } from "react-router-dom";
 const Dashboard = (props) => {
   const { user } = useAuth();
+  const { recipe, getRecipe, getInstanceDetails, previousRecipes } =
+    useRecipe();
+  const navigate = useNavigate();
   const [instanceDetails, setInstanceDetails] = React.useState({
     ingredients: [],
     time: 5,
     type: null,
     cuisinePreference: null,
   });
+  const [result, setResult] = React.useState(null);
   const handleChange = ({ name, value }) => {
-    console.log(name, value);
     setInstanceDetails({ ...instanceDetails, [name]: value });
+  };
+  const handleGenerateRecipe = async () => {
+    // Add your logic here
+    const ingredients = instanceDetails.ingredients.map((ingredient) => {
+      return ingredient.name;
+    });
+    const allergies = user.foodPreferences.allergies.map(
+      (allergy) => allergy.name
+    );
+    console.log(ingredients, allergies);
+    const instanceDetail = {
+      ingredient: ingredients,
+      time: instanceDetails.time,
+      type: instanceDetails.type,
+      cuisinePreference: instanceDetails.cuisinePreference,
+      diet_type: user.foodPreferences.dietPreference,
+      allergies: allergies,
+    };
+    try {
+      const recipe = await getRecipe(instanceDetail);
+      await getInstanceDetails(instanceDetails);
+      setResult(recipe);
+      if (recipe !== "No recipe found") navigate("/recipe/" + recipe.id);
+    } catch (err) {
+      setResult("No recipe found");
+    }
+    setLoading(false);
   };
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -48,18 +81,24 @@ const Dashboard = (props) => {
                   Here you can see the recipes you have generated previously.
                 </p>
                 <div className="d-flex flex-column justify-content-center">
-                  <Divider />
-                  <p className="text-muted" style={{ cursor: "pointer" }}>
-                    Chole Bhature Recipe
-                  </p>
-                  <Divider />
-                  <p className="text-muted" style={{ cursor: "pointer" }}>
-                    Pav Bhaji Recipe
-                  </p>
-                  <Divider />
-                  <p className="text-muted" style={{ cursor: "pointer" }}>
-                    Dal Makhani Recipe
-                  </p>
+                  {previousRecipes.map((recipe, index) => {
+                    return (
+                      <>
+                        <Divider />
+                        <p
+                          key={index}
+                          className="text-muted"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            navigate("/recipe/" + recipe.recipe.id);
+                            setVisible(false);
+                          }}
+                        >
+                          {recipe.recipe.title}
+                        </p>
+                      </>
+                    );
+                  })}
                 </div>
               </Sidebar>
               <Button
@@ -147,9 +186,7 @@ const Dashboard = (props) => {
                   className="main__button px-3 px-sm-5"
                   onClick={() => {
                     setLoading(true);
-                    setTimeout(() => {
-                      setLoading(false);
-                    }, 5000);
+                    handleGenerateRecipe();
                   }}
                 >
                   Generate Recipe
@@ -172,6 +209,17 @@ const Dashboard = (props) => {
                 <h4 className="fw-bold">Generating Recipe .. </h4>
               </div>
               <Progressbar />
+            </div>
+          </div>
+        )}
+        {result && (
+          <div className="row justify-content-center py-4">
+            <div className="col-12 col-md-8">
+              <div className="py-3">
+                {result === "No recipe found" && (
+                  <h4 className="fw-bold">No recipe found</h4>
+                )}
+              </div>
             </div>
           </div>
         )}
