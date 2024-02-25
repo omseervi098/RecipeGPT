@@ -1,5 +1,5 @@
 import "./dashboard.css";
-import React from "react";
+import React, { useEffect } from "react";
 import MultiSelect from "../../components/multiselect/multiselect";
 import { Slider } from "primereact/slider";
 import DropdownwithSearch from "../../components/dropdown/dropdown";
@@ -8,8 +8,7 @@ import { Sidebar } from "primereact/sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/authcontext";
-import { Divider } from "primereact/divider";
-import { ProgressBar } from "primereact/progressbar";
+import IntroDashboard from "../../components/IntroDashboard/IntroDashboard";
 import CookingSVG from "../../asset/images/cooking.svg";
 import Progressbar from "../../components/progressBar/progressBar";
 import axios from "axios";
@@ -17,8 +16,7 @@ import { useRecipe } from "../../context/recipecontext";
 import { Link, useNavigate } from "react-router-dom";
 const Dashboard = (props) => {
   const { user } = useAuth();
-  const { recipe, getRecipe, getInstanceDetails, previousRecipes } =
-    useRecipe();
+  const { recipe, getRecipe, getInstanceDetails, storeRecipe } = useRecipe();
   const navigate = useNavigate();
   const [instanceDetails, setInstanceDetails] = React.useState({
     ingredients: [],
@@ -38,7 +36,6 @@ const Dashboard = (props) => {
     const allergies = user.foodPreferences.allergies.map(
       (allergy) => allergy.name
     );
-    console.log(ingredients, allergies);
     const instanceDetail = {
       ingredient: ingredients,
       time: instanceDetails.time,
@@ -49,6 +46,7 @@ const Dashboard = (props) => {
     };
     try {
       const recipe = await getRecipe(instanceDetail);
+      await storeRecipe(recipe, user, instanceDetails);
       await getInstanceDetails(instanceDetails);
       setResult(recipe);
       if (recipe !== "No recipe found") navigate("/recipe/" + recipe.id);
@@ -57,61 +55,12 @@ const Dashboard = (props) => {
     }
     setLoading(false);
   };
-  const [visible, setVisible] = React.useState(false);
+
   const [loading, setLoading] = React.useState(false);
   return (
     <div className="dashboard py-5">
       <div className="container pb-5 pt-3">
-        <div className="row mb-2 mb-sm-4">
-          <div className="col-12">
-            <div className="float-start">
-              <h2 className="fw-bold">
-                Welcome, <span className="fw-bold">{user.name}</span>{" "}
-              </h2>
-              <p className="text-muted">
-                Welcome to your dashboard. Here you can generate recipes based
-                on your preferences.
-              </p>
-            </div>
-
-            <div className="float-end">
-              <Sidebar visible={visible} onHide={() => setVisible(false)}>
-                <h2>Previous Recipes</h2>
-                <p className="text-muted">
-                  Here you can see the recipes you have generated previously.
-                </p>
-                <div className="d-flex flex-column justify-content-center">
-                  {previousRecipes.map((recipe, index) => {
-                    return (
-                      <>
-                        <Divider />
-                        <p
-                          key={index}
-                          className="text-muted"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            navigate("/recipe/" + recipe.recipe.id);
-                            setVisible(false);
-                          }}
-                        >
-                          {recipe.recipe.title}
-                        </p>
-                      </>
-                    );
-                  })}
-                </div>
-              </Sidebar>
-              <Button
-                onClick={() => {
-                  setVisible(true);
-                }}
-                className="main__button px-3"
-              >
-                <FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;History
-              </Button>
-            </div>
-          </div>
-        </div>
+        <IntroDashboard />
         {!loading && (
           <div className="row justify-content-center py-3">
             <div className="col-12 col-md-8">

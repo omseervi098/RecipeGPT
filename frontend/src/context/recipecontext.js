@@ -56,17 +56,15 @@ export const RecipeProvider = ({ children }) => {
         recipe.id = Math.random().toString(36).substr(2, 9);
       }
       // Add Recipe to Previous Recipes
-      dispatch({
-        type: SET_PREVIOUS_RECIPES,
-        payload: [
-          ...state.previousRecipes,
-          {
-            recipe: recipe,
-            instancedetails: instancedetails,
-            rating: null,
-          },
-        ],
-      });
+      // dispatch({
+      //   type: SET_PREVIOUS_RECIPES,
+      //   payload: [
+      //     ...state.previousRecipes,
+      //     {
+      //       title
+      //     },
+      //   ],
+      // });
       dispatch({ type: SET_RECIPE, payload: recipe });
       return recipe;
     } catch (err) {
@@ -78,7 +76,31 @@ export const RecipeProvider = ({ children }) => {
   const getInstanceDetails = (instancedetails) => {
     dispatch({ type: SET_INSTANCE_DETAILS, payload: instancedetails });
   };
+  const storeRecipe = (recipe, user, instanceDetails) => {
+    console.log("Storing Recipe", recipe, user, instanceDetails);
+    const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes";
+    try {
+      const response = axios.post(
+        url,
+        {
+          user: user,
+          recipe: recipe,
+          instanceDetails: instanceDetails,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
+      console.log(response);
+    } catch (err) {
+      if (err.response) {
+        throw new Error(err.response.data.message);
+      }
+    }
+  };
   const rateRecipe = async (id, rating) => {
     try {
       const url =
@@ -91,9 +113,40 @@ export const RecipeProvider = ({ children }) => {
       }
     }
   };
+  const getAllRecipes = async (user) => {
+    try {
+      const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes/all";
+      const response = await axios.post(
+        url,
+        { user },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log(response.data.data.recipes);
+
+      dispatch({
+        type: SET_PREVIOUS_RECIPES,
+        payload: response.data.data.recipes,
+      });
+    } catch (err) {
+      if (err.response) {
+        throw new Error(err.response.data.message);
+      }
+    }
+  };
   return (
     <RecipeContext.Provider
-      value={{ ...state, getRecipe, getInstanceDetails, rateRecipe }}
+      value={{
+        ...state,
+        getRecipe,
+        getInstanceDetails,
+        rateRecipe,
+        storeRecipe,
+        getAllRecipes,
+      }}
     >
       {children}
     </RecipeContext.Provider>

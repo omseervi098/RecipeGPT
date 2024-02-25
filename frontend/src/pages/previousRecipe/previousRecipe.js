@@ -14,8 +14,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Rating } from "primereact/rating";
 import IntroDashboard from "../../components/IntroDashboard/IntroDashboard";
 
-export default function Recipe() {
-  const { recipe, instancedetails, rating, previousRecipes } = useRecipe();
+export default function PreviousRecipe() {
+  const { previousRecipes } = useRecipe();
   const params = useParams();
 
   const { user } = useAuth();
@@ -23,7 +23,21 @@ export default function Recipe() {
   // useEffect(() => {
   //   console.log(recipe, instancedetails, rating, previousRecipes, params.id);
   // }, []);
-  const [visible, setVisible] = React.useState(false);
+  const [recipe, setRecipe] = React.useState("No recipe found");
+  const [instancedetails, setInstanceDetails] = React.useState({});
+  useEffect(() => {
+    const recipe = previousRecipes.find((recipe) => recipe.id === params.id);
+    if (recipe) {
+      setRecipe(recipe);
+    }
+    setInstanceDetails({
+      ingredients: recipe.requestedIngredients,
+      diet_type: recipe.diet_type,
+      allergies: recipe.allergies,
+      favouriteIngredients: recipe.favouriteIngredients,
+    });
+  }, [previousRecipes, params.id]);
+
   const [ratingValue, setRatingValue] = React.useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   return (
@@ -82,39 +96,42 @@ export default function Recipe() {
                 <p className="text-muted m-0">
                   <span className="fw-bold">Ingredients: </span>
                   <div className="d-flex flex-column p-2 pb-0">
-                    {instancedetails.ingredients.map((ingredient, index) => {
-                      return (
-                        <p key={index} className="px-2">
-                          {ingredient.icon} {ingredient.name}
-                        </p>
-                      );
-                    })}
-                  </div>
-                </p>
-                <p className="text-muted m-0">
-                  <span className="fw-bold">Allergies: </span>
-                  <div className="d-flex flex-column p-2 pb-0">
-                    {user.foodPreferences.allergies.map((allergy, index) => {
-                      return (
-                        <p key={index} className="px-2">
-                          {allergy.icon} {allergy.name}
-                        </p>
-                      );
-                    })}
-                  </div>
-                </p>
-                <p className="text-muted m-0">
-                  <span className="fw-bold">Favorite Ingredients: </span>
-                  <div className="d-flex flex-column p-2 pb-0">
-                    {user.foodPreferences.favouriteIngredients.map(
-                      (ingredient, index) => {
+                    {instancedetails.ingredients &&
+                      instancedetails.ingredients.map((ingredient, index) => {
                         return (
                           <p key={index} className="px-2">
                             {ingredient.icon} {ingredient.name}
                           </p>
                         );
-                      }
-                    )}
+                      })}
+                  </div>
+                </p>
+                <p className="text-muted m-0">
+                  <span className="fw-bold">Allergies: </span>
+                  <div className="d-flex flex-column p-2 pb-0">
+                    {instancedetails.allergies &&
+                      instancedetails.allergies.map((allergy, index) => {
+                        return (
+                          <p key={index} className="px-2">
+                            {allergy.icon} {allergy.name}
+                          </p>
+                        );
+                      })}
+                  </div>
+                </p>
+                <p className="text-muted m-0">
+                  <span className="fw-bold">Favorite Ingredients: </span>
+                  <div className="d-flex flex-column p-2 pb-0">
+                    {instancedetails.favouriteIngredients &&
+                      instancedetails.favouriteIngredients.map(
+                        (ingredient, index) => {
+                          return (
+                            <p key={index} className="px-2">
+                              {ingredient.icon} {ingredient.name}
+                            </p>
+                          );
+                        }
+                      )}
                   </div>
                 </p>
                 {instancedetails.cuisine && (

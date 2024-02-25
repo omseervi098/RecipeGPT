@@ -39,6 +39,9 @@ const userSchema = new mongoose.Schema(
     foodPreferences: {
       type: Object,
     },
+    recipes: {
+      type: Array,
+    },
   },
   {
     timestamps: true,

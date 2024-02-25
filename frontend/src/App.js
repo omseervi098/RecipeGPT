@@ -22,6 +22,7 @@ import Profile from "./pages/profile/profile";
 import { useAuth } from "./context/authcontext";
 import ForgetPassword from "./pages/forgetPass/forgetPass";
 import Recipe from "./pages/recipe/recipe";
+import PreviousRecipe from "./pages/previousRecipe/previousRecipe";
 
 config.autoAddCss = false;
 
@@ -70,6 +71,12 @@ function App() {
           <Route
             path="/recipe/:id"
             element={isAuthenticated() ? <Recipe /> : <Navigate to="/login" />}
+          ></Route>
+          <Route
+            path="/previous-recipe/:id"
+            element={
+              isAuthenticated() ? <PreviousRecipe /> : <Navigate to="/login" />
+            }
           ></Route>
         </Routes>
       </Router>
