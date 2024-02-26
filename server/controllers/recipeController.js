@@ -24,6 +24,27 @@ export const getAllRecipes = async (req, res) => {
     });
   }
 };
+export const rateRecipe = async (req, res) => {
+  try {
+    const { recipe } = req.body;
+    // search and update recipe by id
+    const recipe1 = await Recipe.findOne({ id: recipe.id });
+    recipe1.rating = recipe.rating;
+    await recipe1.save({ validateBeforeSave: false });
+    res.status(200).json({
+      status: "success",
+      data: {
+        recipe1,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
 export const getRecipeById = async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);

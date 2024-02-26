@@ -15,7 +15,7 @@ import { Rating } from "primereact/rating";
 import IntroDashboard from "../../components/IntroDashboard/IntroDashboard";
 
 export default function PreviousRecipe() {
-  const { previousRecipes } = useRecipe();
+  const { previousRecipes, rateRecipe } = useRecipe();
   const params = useParams();
 
   const { user } = useAuth();
@@ -25,10 +25,16 @@ export default function PreviousRecipe() {
   // }, []);
   const [recipe, setRecipe] = React.useState("No recipe found");
   const [instancedetails, setInstanceDetails] = React.useState({});
+
+  const [ratingValue, setRatingValue] = React.useState(null);
+  const [modalShow, setModalShow] = React.useState(false);
   useEffect(() => {
     const recipe = previousRecipes.find((recipe) => recipe.id === params.id);
     if (recipe) {
       setRecipe(recipe);
+      if (recipe.rating) {
+        setRatingValue(recipe.rating);
+      }
     }
     setInstanceDetails({
       ingredients: recipe.requestedIngredients,
@@ -38,8 +44,6 @@ export default function PreviousRecipe() {
     });
   }, [previousRecipes, params.id]);
 
-  const [ratingValue, setRatingValue] = React.useState(null);
-  const [modalShow, setModalShow] = React.useState(false);
   return (
     <div className="recipe py-5">
       <div className="container pb-5 pt-3">
@@ -146,10 +150,38 @@ export default function PreviousRecipe() {
                     {instancedetails.dishType}
                   </p>
                 )}
-                <p className="text-muted">
-                  <span className="fw-bold">Diet: </span>
-                  {user.foodPreferences.dietPreference}
-                </p>
+                {instancedetails.diet_type && (
+                  <p className="text-muted">
+                    <span className="fw-bold">Diet: </span>
+                    {instancedetails.diet_type}
+                  </p>
+                )}
+                {recipe.rating && (
+                  <p className="text-muted ">
+                    <span className="fw-bold">Rating: </span>
+                    <div className="d-flex justify-content-center">
+                      <Rating
+                        value={ratingValue}
+                        onIcon={
+                          <img
+                            src="https://primefaces.org/cdn/primereact/images/rating/custom-icon-active.png"
+                            alt="custom"
+                            width="30px"
+                            height="30px"
+                          />
+                        }
+                        offIcon={
+                          <img
+                            src="https://primefaces.org/cdn/primereact/images/rating/custom-icon.png"
+                            alt="custom"
+                            width="30px"
+                            height="30px"
+                          />
+                        }
+                      />
+                    </div>
+                  </p>
+                )}
               </div>
             </Card>
           </div>
@@ -164,11 +196,13 @@ export default function PreviousRecipe() {
                 <FontAwesomeIcon icon={faClockRotateLeft} /> &nbsp;Generate
                 Another Recipe
               </Button>
+
               <Button
                 className="main__button px-3 mt-3 ms-3"
                 onClick={() => setModalShow(true)}
               >
-                <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;Rate Recipe
+                <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;
+                {recipe.rating ? "Update" : "Rate"} Recipe
               </Button>
             </div>
           </div>
@@ -206,7 +240,11 @@ export default function PreviousRecipe() {
             <Modal.Footer>
               <Button
                 className="main__button px-3"
-                onClick={() => setModalShow(false)}
+                onClick={() => {
+                  setModalShow(false);
+                  rateRecipe(recipe.id, ratingValue);
+                  setRecipe({ ...recipe, rating: ratingValue });
+                }}
               >
                 Save
               </Button>

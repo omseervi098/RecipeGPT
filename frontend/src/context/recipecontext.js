@@ -103,9 +103,19 @@ export const RecipeProvider = ({ children }) => {
   };
   const rateRecipe = async (id, rating) => {
     try {
-      const url =
-        process.env.REACT_APP_FLASK_URL + "/api/v1/recipes/" + id + "/rate";
-      const response = await axios.post(url, { rating });
+      console.log(id, rating);
+      const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes/rate";
+      const response = await axios.post(
+        url,
+        { recipe: { id, rating } },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      console.log(response.data.data);
       dispatch({ type: SET_RATING, payload: response.data.data });
     } catch (err) {
       if (err.response) {

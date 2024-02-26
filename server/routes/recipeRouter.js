@@ -5,6 +5,7 @@ import {
   deleteRecipe,
   getAllRecipes,
   getRecipeById,
+  rateRecipe,
   updateRecipe,
 } from "../controllers/recipeController.js";
 const router = Router();
@@ -18,7 +19,11 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   getRecipeById
 );
-
+router.post(
+  "/rate",
+  passport.authenticate("jwt", { session: false }),
+  rateRecipe
+);
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),

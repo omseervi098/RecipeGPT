@@ -46,6 +46,11 @@ const Dashboard = (props) => {
     };
     try {
       const recipe = await getRecipe(instanceDetail);
+      if (recipe === "No recipe found") {
+        setResult("No recipe found");
+        setLoading(false);
+        return;
+      }
       await storeRecipe(recipe, user, instanceDetails);
       await getInstanceDetails(instanceDetails);
       setResult(recipe);

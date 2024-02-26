@@ -15,7 +15,8 @@ import { Rating } from "primereact/rating";
 import IntroDashboard from "../../components/IntroDashboard/IntroDashboard";
 
 export default function Recipe() {
-  const { recipe, instancedetails, rating, previousRecipes } = useRecipe();
+  const { recipe, instancedetails, rating, previousRecipes, rateRecipe } =
+    useRecipe();
   const params = useParams();
 
   const { user } = useAuth();
@@ -23,7 +24,6 @@ export default function Recipe() {
   // useEffect(() => {
   //   console.log(recipe, instancedetails, rating, previousRecipes, params.id);
   // }, []);
-  const [visible, setVisible] = React.useState(false);
   const [ratingValue, setRatingValue] = React.useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   return (
@@ -133,6 +133,32 @@ export default function Recipe() {
                   <span className="fw-bold">Diet: </span>
                   {user.foodPreferences.dietPreference}
                 </p>
+                {ratingValue && (
+                  <p className="text-muted ">
+                    <span className="fw-bold">Rating: </span>
+                    <div className="d-flex justify-content-center">
+                      <Rating
+                        value={ratingValue}
+                        onIcon={
+                          <img
+                            src="https://primefaces.org/cdn/primereact/images/rating/custom-icon-active.png"
+                            alt="custom"
+                            width="30px"
+                            height="30px"
+                          />
+                        }
+                        offIcon={
+                          <img
+                            src="https://primefaces.org/cdn/primereact/images/rating/custom-icon.png"
+                            alt="custom"
+                            width="30px"
+                            height="30px"
+                          />
+                        }
+                      />
+                    </div>
+                  </p>
+                )}
               </div>
             </Card>
           </div>
@@ -151,7 +177,8 @@ export default function Recipe() {
                 className="main__button px-3 mt-3 ms-3"
                 onClick={() => setModalShow(true)}
               >
-                <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;Rate Recipe
+                <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;
+                {ratingValue ? "Update" : "Rate"} Recipe
               </Button>
             </div>
           </div>
@@ -166,7 +193,10 @@ export default function Recipe() {
               <div className="d-flex justify-content-center">
                 <Rating
                   value={ratingValue}
-                  onChange={(e) => setRatingValue(e.value)}
+                  onChange={(e) => {
+                    setRatingValue(e.value);
+                    rateRecipe(params.id, e.value);
+                  }}
                   onIcon={
                     <img
                       src="https://primefaces.org/cdn/primereact/images/rating/custom-icon-active.png"
