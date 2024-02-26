@@ -178,7 +178,7 @@ export default function Recipe() {
                 onClick={() => setModalShow(true)}
               >
                 <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;
-                {ratingValue ? "Update" : "Rate"} Recipe
+                {ratingValue ? "Update Rating" : "Rate Recipe"}
               </Button>
             </div>
           </div>

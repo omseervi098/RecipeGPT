@@ -202,7 +202,7 @@ export default function PreviousRecipe() {
                 onClick={() => setModalShow(true)}
               >
                 <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;
-                {recipe.rating ? "Update" : "Rate"} Recipe
+                {recipe.rating ? "Update Rating" : "Rate Recipe"}
               </Button>
             </div>
           </div>

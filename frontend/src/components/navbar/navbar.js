@@ -43,7 +43,7 @@ function NavBar(props) {
                 </Link>
                 <Link
                   className={`m-2 ${styles.navlink}`}
-                  to="/logout"
+                  to="/"
                   onClick={logout}
                 >
                   Logout
