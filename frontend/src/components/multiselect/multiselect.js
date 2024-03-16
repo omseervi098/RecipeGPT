@@ -18,9 +18,8 @@ export default function MultiSelect({
         _filteredCountries = [...ingredients];
       } else {
         _filteredCountries = ingredients.filter((country) => {
-          return country.name
-            .toLowerCase()
-            .startsWith(event.query.toLowerCase());
+          // check if it contains the search query
+          return country.name.toLowerCase().includes(event.query.toLowerCase());
         });
       }
 

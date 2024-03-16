@@ -1,5 +1,701 @@
 [
     {
+        "name": "Rice",
+        "icon": "🍚"
+    },
+    {
+        "name": "Lentils (Dal)",
+        "icon": "🥣"
+    },
+    {
+        "name": "Chickpeas (Chana)",
+        "icon": "🌱"
+    },
+    {
+        "name": "Wheat Flour",
+        "icon": "🌾"
+    },
+    {
+        "name": "Gram Flour (Besan)",
+        "icon": "🌟"
+    },
+    {
+        "name": "Mustard Seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Cumin Seeds",
+        "icon": "🌿"
+    },
+    {
+        "name": "Coriander Seeds",
+        "icon": "🌿"
+    },
+    {
+        "name": "Fenugreek Seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Turmeric Powder",
+        "icon": "🧡"
+    },
+    {
+        "name": "Red Chili Powder",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Garam Masala",
+        "icon": "🌿"
+    },
+    {
+        "name": "Cardamom Pods",
+        "icon": "🍃"
+    },
+    {
+        "name": "Cinnamon Sticks",
+        "icon": "🍂"
+    },
+    {
+        "name": "Cloves",
+        "icon": "🌸"
+    },
+    {
+        "name": "Bay Leaves",
+        "icon": "🍃"
+    },
+    {
+        "name": "Curry Leaves",
+        "icon": "🌿"
+    },
+    {
+        "name": "Asafoetida (Hing)",
+        "icon": "🌿"
+    },
+    {
+        "name": "Tamarind Paste",
+        "icon": "🍃"
+    },
+    {
+        "name": "Coconut Milk",
+        "icon": "🥥"
+    },
+    {
+        "name": "Fresh Coconut",
+        "icon": "🥥"
+    },
+    {
+        "name": "Cashew Nuts",
+        "icon": "💰"
+    },
+    {
+        "name": "Almonds",
+        "icon": "🌰"
+    },
+    {
+        "name": "Pistachios",
+        "icon": "🥜"
+    },
+    {
+        "name": "Peanuts",
+        "icon": "🥜"
+    },
+    {
+        "name": "Ghee",
+        "icon": "🌟"
+    },
+    {
+        "name": "Clarified Butter",
+        "icon": "🌟"
+    },
+    {
+        "name": "Mustard Oil",
+        "icon": "🌱"
+    },
+    {
+        "name": "Sesame Oil",
+        "icon": "🌿"
+    },
+    {
+        "name": "Sunflower Oil",
+        "icon": "🌻"
+    },
+    {
+        "name": "Vegetable Oil",
+        "icon": "🌱"
+    },
+    {
+        "name": "Basmati Rice",
+        "icon": "🌾"
+    },
+    {
+        "name": "Sona Masoori Rice",
+        "icon": "🌾"
+    },
+    {
+        "name": "Jasmine Rice",
+        "icon": "🌸"
+    },
+    {
+        "name": "Parboiled Rice",
+        "icon": "🌱"
+    },
+    {
+        "name": "Idli Rice",
+        "icon": "🍚"
+    },
+    {
+        "name": "Poha (Flattened Rice)",
+        "icon": "🍚"
+    },
+    {
+        "name": "Semolina (Rava/Sooji)",
+        "icon": "🌾"
+    },
+    {
+        "name": "Jaggery",
+        "icon": "🍬"
+    },
+    {
+        "name": "Sugar",
+        "icon": "🍭"
+    },
+    {
+        "name": "Salt",
+        "icon": "🧂"
+    },
+    {
+        "name": "Black Salt",
+        "icon": "🖤"
+    },
+    {
+        "name": "Rock Salt",
+        "icon": "⛰️"
+    },
+    {
+        "name": "Tamarind",
+        "icon": "🌳"
+    },
+    {
+        "name": "Kokum",
+        "icon": "🍃"
+    },
+    {
+        "name": "Dry Mango Powder (Amchur)",
+        "icon": "🌳"
+    },
+    {
+        "name": "Cilantro (Coriander Leaves)",
+        "icon": "🍃"
+    },
+    {
+        "name": "Mint Leaves",
+        "icon": "🌱"
+    },
+    {
+        "name": "Curry Powder",
+        "icon": "🌿"
+    },
+    {
+        "name": "Curry Paste",
+        "icon": "🍃"
+    },
+    {
+        "name": "Sambar Powder",
+        "icon": "🌱"
+    },
+    {
+        "name": "Rasam Powder",
+        "icon": "🍂"
+    },
+    {
+        "name": "Chaat Masala",
+        "icon": "🍴"
+    },
+    {
+        "name": "Pickling Spice",
+        "icon": "🥒"
+    },
+    {
+        "name": "Fennel Seeds",
+        "icon": "🌿"
+    },
+    {
+        "name": "Poppy Seeds",
+        "icon": "🌼"
+    },
+    {
+        "name": "Nigella Seeds",
+        "icon": "🌿"
+    },
+    {
+        "name": "Carom Seeds (Ajwain)",
+        "icon": "🌱"
+    },
+    {
+        "name": "Black Pepper",
+        "icon": "🌿"
+    },
+    {
+        "name": "Green Cardamom",
+        "icon": "🍃"
+    },
+    {
+        "name": "Black Cardamom",
+        "icon": "🌿"
+    },
+    {
+        "name": "Nutmeg",
+        "icon": "🌰"
+    },
+    {
+        "name": "Mace",
+        "icon": "🍃"
+    },
+    {
+        "name": "Star Anise",
+        "icon": "⭐"
+    },
+    {
+        "name": "Fenugreek Leaves (Kasuri Methi)",
+        "icon": "🌿"
+    },
+    {
+        "name": "Saffron",
+        "icon": "🌼"
+    },
+    {
+        "name": "Paneer",
+        "icon": "🧀"
+    },
+    {
+        "name": "Ginger",
+        "icon": "🧡"
+    },
+    {
+        "name": "Garlic",
+        "icon": "🧄"
+    },
+    {
+        "name": "Onion",
+        "icon": "🧅"
+    },
+    {
+        "name": "Tomato",
+        "icon": "🍅"
+    },
+    {
+        "name": "Potato",
+        "icon": "🥔"
+    },
+    {
+        "name": "Cauliflower",
+        "icon": "🥦"
+    },
+    {
+        "name": "Eggplant (Brinjal)",
+        "icon": "🍆"
+    },
+    {
+        "name": "Spinach",
+        "icon": "🍃"
+    },
+    {
+        "name": "Okra (Ladyfinger)",
+        "icon": "🫑"
+    },
+    {
+        "name": "Cabbage",
+        "icon": "🥬"
+    },
+    {
+        "name": "Carrot",
+        "icon": "🥕"
+    },
+    {
+        "name": "Beetroot",
+        "icon": "🥒"
+    },
+    {
+        "name": "Radish",
+        "icon": "🥕"
+    },
+    {
+        "name": "Green Peas",
+        "icon": "🌱"
+    },
+    {
+        "name": "Corn",
+        "icon": "🌽"
+    },
+    {
+        "name": "Bell Pepper",
+        "icon": "🫑"
+    },
+    {
+        "name": "Green Chili",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Red Chili",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Cumin Powder",
+        "icon": "🌿"
+    },
+    {
+        "name": "Coriander Powder",
+        "icon": "🌿"
+    },
+    {
+        "name": "Bay Leaf",
+        "icon": "🍃"
+    },
+    {
+        "name": "Cloves",
+        "icon": "🌸"
+    },
+    {
+        "name": "Cinnamon",
+        "icon": "🍂"
+    },
+    {
+        "name": "Cardamom",
+        "icon": "🍃"
+    },
+    {
+        "name": "Nutmeg",
+        "icon": "🌰"
+    },
+    {
+        "name": "Mace",
+        "icon": "🍃"
+    },
+    {
+        "name": "Fennel",
+        "icon": "🌿"
+    },
+    {
+        "name": "Black Pepper",
+        "icon": "🌿"
+    },
+    {
+        "name": "Ajwain (Carom Seeds)",
+        "icon": "🌱"
+    },
+    {
+        "name": "Poppy Seeds",
+        "icon": "🌼"
+    },
+    {
+        "name": "Sesame Seeds",
+        "icon": "🌿"
+    },
+    {
+        "name": "Mustard Oil",
+        "icon": "🌱"
+    },
+    {
+        "name": "Coconut Oil",
+        "icon": "🥥"
+    },
+    {
+        "name": "Peanut Oil",
+        "icon": "🥜"
+    },
+    {
+        "name": "Ginger-Garlic Paste",
+        "icon": "🧄🧡"
+    },
+    {
+        "name": "Fenugreek Leaves",
+        "icon": "🌿"
+    },
+    {
+        "name": "Kasuri Methi",
+        "icon": "🌿"
+    },
+    {
+        "name": "Tamarind Pulp",
+        "icon": "🍃"
+    },
+    {
+        "name": "Curry Paste",
+        "icon": "🍃"
+    },
+    {
+        "name": "Rasam Powder",
+        "icon": "🍂"
+    },
+    {
+        "name": "Idli Batter",
+        "icon": "🍚"
+    },
+    {
+        "name": "Dosa Batter",
+        "icon": "🍚"
+    },
+    {
+        "name": "Fenugreek Seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Panch Phoron (Bengali Five-Spice Blend)",
+        "icon": "🌱"
+    },
+    {
+        "name": "Hing (Asafoetida)",
+        "icon": "🌱"
+    },
+    {
+        "name": "Jaggery",
+        "icon": "🍬"
+    },
+    {
+        "name": "Kokum",
+        "icon": "🍃"
+    },
+    {
+        "name": "Dry Mango Powder (Amchur)",
+        "icon": "🌳"
+    },
+    {
+        "name": "Cilantro (Coriander Leaves)",
+        "icon": "🍃"
+    },
+    {
+        "name": "Mint Leaves",
+        "icon": "🌱"
+    },
+    {
+        "name": "Curry Powder",
+        "icon": "🌿"
+    },
+    {
+        "name": "Chaat Masala",
+        "icon": "🍴"
+    },
+    {
+        "name": "Black Salt",
+        "icon": "🖤"
+    },
+    {
+        "name": "Rock Salt",
+        "icon": "⛰️"
+    },
+    {
+        "name": "Saffron",
+        "icon": "🌼"
+    },
+    {
+        "name": "Hing (Asafoetida)",
+        "icon": "🌿"
+    },
+    {
+        "name": "Rose Water",
+        "icon": "🌹"
+    },
+    {
+        "name": "Kewra Water",
+        "icon": "🌸"
+    },
+    {
+        "name": "Tamarind Chutney",
+        "icon": "🍃"
+    },
+    {
+        "name": "Green Mango Chutney",
+        "icon": "🌱"
+    },
+    {
+        "name": "Coriander Chutney",
+        "icon": "🍃"
+    },
+    {
+        "name": "Red Chili Chutney",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Mango Pickle",
+        "icon": "🥭"
+    },
+    {
+        "name": "Lemon Pickle",
+        "icon": "🍋"
+    },
+    {
+        "name": "Mixed Pickle",
+        "icon": "🥒"
+    },
+    {
+        "name": "Chili Pickle",
+        "icon": "🌶️"
+    },
+    {
+        "name": "Ginger Pickle",
+        "icon": "🧡"
+    },
+    {
+        "name": "Mango Powder (Amchur)",
+        "icon": "🌳"
+    },
+    {
+        "name": "Papad",
+        "icon": "🥘"
+    },
+    {
+        "name": "Coconut Chutney",
+        "icon": "🥥"
+    },
+    {
+        "name": "Yogurt",
+        "icon": "🥛"
+    },
+    {
+        "name": "Butter Milk",
+        "icon": "🥛"
+    },
+    {
+        "name": "Rose Syrup",
+        "icon": "🌹"
+    },
+    {
+        "name": "Fennel Powder",
+        "icon": "🌿"
+    },
+    {
+        "name": "Pomegranate Seeds",
+        "icon": "🌱"
+    },
+    {
+        "name": "Gulkand",
+        "icon": "🌹"
+    },
+    {
+        "name": "Tamarind Pulp",
+        "icon": "🍃"
+    },
+    {
+        "name": "Coconut Cream",
+        "icon": "🥥"
+    },
+    {
+        "name": "Mango Pulp",
+        "icon": "🥭"
+    },
+    {
+        "name": "Lemon Juice",
+        "icon": "🍋"
+    },
+    {
+        "name": "Curd",
+        "icon": "🥛"
+    },
+    {
+        "name": "Clarified Butter (Ghee)",
+        "icon": "🌟"
+    },
+    {
+        "name": "Rice Vinegar",
+        "icon": "🍚"
+    },
+    {
+        "name": "Tamarind Sauce",
+        "icon": "🍃"
+    },
+    {
+        "name": "Jaggery Syrup",
+        "icon": "🍬"
+    },
+    {
+        "name": "Pomegranate Molasses",
+        "icon": "🌱"
+    },
+    {
+        "name": "Fenugreek Leaves (Kasuri Methi)",
+        "icon": "🌿"
+    },
+    {
+        "name": "Coconut Water",
+        "icon": "🥥"
+    },
+    {
+        "name": "Chaat Masala",
+        "icon": "🍴"
+    },
+    {
+        "name": "Tamarind Concentrate",
+        "icon": "🍃"
+    },
+    {
+        "name": "Kewra Essence",
+        "icon": "🌸"
+    },
+    {
+        "name": "Rose Water",
+        "icon": "🌹"
+    },
+    {
+        "name": "Pistachio Essence",
+        "icon": "🥜"
+    },
+    {
+        "name": "Almond Essence",
+        "icon": "🌰"
+    },
+    {
+        "name": "Saffron Essence",
+        "icon": "🌼"
+    },
+    {
+        "name": "Coconut Essence",
+        "icon": "🥥"
+    },
+    {
+        "name": "Mango Essence",
+        "icon": "🥭"
+    },
+    {
+        "name": "Vanilla Essence",
+        "icon": "🌱"
+    },
+    {
+        "name": "Cardamom Essence",
+        "icon": "🍃"
+    },
+    {
+        "name": "Butter Essence",
+        "icon": "🌟"
+    },
+    {
+        "name": "Banana Essence",
+        "icon": "🍌"
+    },
+    {
+        "name": "Rose Syrup",
+        "icon": "🌹"
+    },
+    {
+        "name": "Khus Syrup",
+        "icon": "🌱"
+    },
+    {
+        "name": "Thandai Syrup",
+        "icon": "🍹"
+    },
+    {
+        "name": "Lemon Syrup",
+        "icon": "🍋"
+    },
+    {
+        "name": "Orange Syrup",
+        "icon": "🍊"
+    },
+    {
+        "name": "Mango Syrup",
+        "icon": "🥭"
+    },
+    {
         "name": "Adzuki beans",
         "icon": "🌱"
     },
