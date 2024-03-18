@@ -12,7 +12,7 @@ export default function Progressbar(props) {
     interval.current = setInterval(() => {
       _val += Math.floor(Math.random() * 10) + 1;
 
-      if (_val >= 100) {
+      if (props.loading && _val >= 100) {
         _val = 100;
         toast.success("Recipe Generated Successfully");
         clearInterval(interval.current);

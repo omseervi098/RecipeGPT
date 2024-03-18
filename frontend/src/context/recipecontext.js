@@ -49,24 +49,20 @@ export const RecipeProvider = ({ children }) => {
   const getRecipe = async (instancedetails) => {
     try {
       const url = process.env.REACT_APP_FLASK_URL + "/get";
-      const response = await axios.post(url, instancedetails);
-      const recipe = response.data;
-      if (recipe !== "No recipe found") {
-        // Add Unique Key to Each Recipe
-        recipe.id = Math.random().toString(36).substr(2, 9);
+      try {
+        const response = await axios.post(url, instancedetails);
+        const recipe = response.data;
+        if (recipe !== "No recipe found") {
+          // Add Unique Key to Each Recipe
+          recipe.id = Math.random().toString(36).substr(2, 9);
+        }
+        dispatch({ type: SET_RECIPE, payload: recipe });
+        return recipe;
+      } catch (err) {
+        if (err.response) {
+          console.log(err.response.data.message);
+        }
       }
-      // Add Recipe to Previous Recipes
-      // dispatch({
-      //   type: SET_PREVIOUS_RECIPES,
-      //   payload: [
-      //     ...state.previousRecipes,
-      //     {
-      //       title
-      //     },
-      //   ],
-      // });
-      dispatch({ type: SET_RECIPE, payload: recipe });
-      return recipe;
     } catch (err) {
       if (err.response) {
         throw new Error(err.response.data.message);
@@ -80,7 +76,7 @@ export const RecipeProvider = ({ children }) => {
     console.log("Storing Recipe", recipe, user, instanceDetails);
     const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes";
     try {
-      const response = axios.post(
+      axios.post(
         url,
         {
           user: user,
@@ -93,12 +89,8 @@ export const RecipeProvider = ({ children }) => {
           },
         }
       );
-
-      console.log(response);
     } catch (err) {
-      if (err.response) {
-        throw new Error(err.response.data.message);
-      }
+      console.log(err);
     }
   };
   const rateRecipe = async (id, rating) => {
@@ -118,9 +110,7 @@ export const RecipeProvider = ({ children }) => {
       console.log(response.data.data);
       dispatch({ type: SET_RATING, payload: response.data.data });
     } catch (err) {
-      if (err.response) {
-        throw new Error(err.response.data.message);
-      }
+      console.log(err);
     }
   };
   const getAllRecipes = async (user) => {
@@ -142,9 +132,7 @@ export const RecipeProvider = ({ children }) => {
         payload: response.data.data.recipes,
       });
     } catch (err) {
-      if (err.response) {
-        throw new Error(err.response.data.message);
-      }
+      console.log(err);
     }
   };
   return (

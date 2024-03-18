@@ -3,17 +3,13 @@ import React, { useEffect } from "react";
 import MultiSelect from "../../components/multiselect/multiselect";
 import { Slider } from "primereact/slider";
 import DropdownwithSearch from "../../components/dropdown/dropdown";
-import { Button } from "primereact/button";
-import { Sidebar } from "primereact/sidebar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../context/authcontext";
 import IntroDashboard from "../../components/IntroDashboard/IntroDashboard";
 import CookingSVG from "../../asset/images/cooking.svg";
 import Progressbar from "../../components/progressBar/progressBar";
-import axios from "axios";
 import { useRecipe } from "../../context/recipecontext";
 import { Link, useNavigate } from "react-router-dom";
+import { Dialog } from "primereact/dialog";
 const Dashboard = (props) => {
   const { user } = useAuth();
   const { recipe, getRecipe, getInstanceDetails, storeRecipe } = useRecipe();
@@ -25,6 +21,7 @@ const Dashboard = (props) => {
     cuisinePreference: null,
   });
   const [result, setResult] = React.useState(null);
+  const [visible, setVisible] = React.useState(false);
   const handleChange = ({ name, value }) => {
     setInstanceDetails({ ...instanceDetails, [name]: value });
   };
@@ -46,9 +43,14 @@ const Dashboard = (props) => {
     };
     try {
       const recipe = await getRecipe(instanceDetail);
-      if (recipe === "No recipe found") {
+      if (
+        recipe === "No recipe found" ||
+        recipe === null ||
+        recipe === undefined
+      ) {
         setResult("No recipe found");
         setLoading(false);
+        setVisible(true);
         return;
       }
       await storeRecipe(recipe, user, instanceDetails);
@@ -150,32 +152,55 @@ const Dashboard = (props) => {
           </div>
         )}
         {loading && (
-          <div className="row justify-content-center py-4">
-            <div className="col-12 col-md-8">
-              <div className="py-3 d-flex justify-content-center align-items-center">
-                <img
-                  src={CookingSVG}
-                  alt="cooking"
-                  className="img-fluid col-6"
-                />
+          <Dialog
+            visible={true}
+            style={{ width: "50vw" }}
+            breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+            onHide={() => setVisible(true)}
+            content={({ hide }) => (
+              <div
+                className="row justify-content-center py-4 bg-white"
+                style={{ borderRadius: "10px" }}
+              >
+                <div className="col-12 col-md-8">
+                  <div className="py-3 d-flex justify-content-center align-items-center">
+                    <img
+                      src={CookingSVG}
+                      alt="cooking"
+                      className="img-fluid col-6"
+                    />
+                  </div>
+                  <div className="py-3 d-flex justify-content-center align-items-center">
+                    <h4 className="fw-bold">Generating Recipe .. </h4>
+                  </div>
+                  <Progressbar props={loading} />
+                </div>
               </div>
-              <div className="py-3 d-flex justify-content-center align-items-center">
-                <h4 className="fw-bold">Generating Recipe .. </h4>
-              </div>
-              <Progressbar />
-            </div>
-          </div>
+            )}
+          />
         )}
-        {result && (
-          <div className="row justify-content-center py-4">
-            <div className="col-12 col-md-8">
-              <div className="py-3">
-                {result === "No recipe found" && (
-                  <h4 className="fw-bold">No recipe found</h4>
-                )}
+        {result && result === "No recipe found" && (
+          <Dialog
+            visible={visible}
+            style={{ width: "40vw" }}
+            breakpoints={{ "960px": "80vw", "641px": "80vw" }}
+            onHide={() => setVisible(false)}
+          >
+            <div
+              className="row justify-content-center py-0 p-0 m-0 bg-white"
+              style={{ borderRadius: "10px" }}
+            >
+              <div className="col-12 col-md-8 p-0 m-0">
+                <div className=" d-flex justify-content-center align-items-center">
+                  <h4 className="fw-bold">
+                    <div className="text-danger">
+                      No recipe found for the given details. !!!{" "}
+                    </div>
+                  </h4>
+                </div>
               </div>
             </div>
-          </div>
+          </Dialog>
         )}
       </div>
     </div>

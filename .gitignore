@@ -11,4 +11,7 @@
 
 *.pkl
 
+*.ipynb
 
+dataset/
+dataset/*
