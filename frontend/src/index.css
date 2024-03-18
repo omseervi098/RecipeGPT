@@ -45,4 +45,18 @@ code {
   opacity: 0.6;
 }
 
-/* Flags */
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+::-webkit-scrollbar-track {
+  background: rgb(174, 174, 174);
+  border-radius: 10px;
+}

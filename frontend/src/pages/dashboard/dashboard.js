@@ -10,6 +10,7 @@ import Progressbar from "../../components/progressBar/progressBar";
 import { useRecipe } from "../../context/recipecontext";
 import { Link, useNavigate } from "react-router-dom";
 import { Dialog } from "primereact/dialog";
+import { Divider } from "primereact/divider";
 const Dashboard = (props) => {
   const { user } = useAuth();
   const { recipe, getRecipe, getInstanceDetails, storeRecipe } = useRecipe();
@@ -68,9 +69,10 @@ const Dashboard = (props) => {
     <div className="dashboard py-5">
       <div className="container pb-5 pt-3">
         <IntroDashboard />
+        <Divider />
         {!loading && (
           <div className="row justify-content-center py-3">
-            <div className="col-12 col-md-8">
+            <div className="col-12 col-md-10">
               <div className="py-3">
                 <h4 className="fw-bold">Ingredients </h4>
                 <p className="text-muted">
@@ -107,7 +109,7 @@ const Dashboard = (props) => {
                   />
                 </div>
               </div>
-              <div className="py-3">
+              {/* <div className="py-3">
                 <h4 className="fw-bold">What type of dish do you want? </h4>
                 <p className="text-muted">
                   Select the type of dish you want to cook from the dropdown.
@@ -136,7 +138,7 @@ const Dashboard = (props) => {
                   type={"dropdown"}
                   handleChange={handleChange}
                 />
-              </div>
+              </div> */}
               <div className="mt-3 text-center d-flex justify-content-center">
                 <button
                   className="main__button px-3 px-sm-5"

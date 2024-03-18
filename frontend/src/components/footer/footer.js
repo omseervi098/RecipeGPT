@@ -9,7 +9,15 @@ const Footer = () => {
       <div className={`${styles.footer__container}`}>
         <div className={`${styles.footer__logo}`}>
           <Link to="/">
-            <h2>RecipeGPT</h2>
+            <div className="d-flex flex-column align-items-center">
+              <h2 className="p-0 m-0">RecipeGPT</h2>
+              <img
+                src="/logo192.png"
+                alt="logo"
+                className="img-fluid"
+                width={150}
+              />
+            </div>
           </Link>
         </div>
 

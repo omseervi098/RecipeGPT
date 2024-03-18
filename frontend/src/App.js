@@ -16,24 +16,29 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/Signup";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import NavBar from "./components/navbar/navbar";
-import Footer from "./components/footer/footer";
 import Dashboard from "./pages/dashboard/dashboard";
 import Profile from "./pages/profile/profile";
 import { useAuth } from "./context/authcontext";
 import ForgetPassword from "./pages/forgetPass/forgetPass";
 import Recipe from "./pages/recipe/recipe";
 import PreviousRecipe from "./pages/previousRecipe/previousRecipe";
+import { useEffect, useState } from "react";
 
 config.autoAddCss = false;
 
 function App() {
   const { isAuthenticated } = useAuth();
-
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    });
+  }, []);
   return (
     <div className="App ">
       <ToastContainer position="bottom-left" />
       <Router>
-        <NavBar />
+        <NavBar width={width} />
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route

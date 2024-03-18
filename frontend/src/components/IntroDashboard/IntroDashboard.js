@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-
+import { Rating } from "primereact/rating";
+import styles from "./IntroDashboard.module.css";
 function IntroDashboard(props) {
   const { previousRecipes, getAllRecipes } = useRecipe();
   const { user } = useAuth();
   const [visible, setVisible] = useState(false);
+  const [hover, setHover] = useState(null);
   const navigate = useNavigate();
   return (
     <div className="row mb-2 mb-sm-4">
@@ -27,9 +29,12 @@ function IntroDashboard(props) {
         </div>
 
         <div className="float-end">
-          <Sidebar visible={visible} onHide={() => setVisible(false)}>
-            <h2>Previous Recipes</h2>
-            <p className="text-muted">
+          <Sidebar
+            visible={visible}
+            onHide={() => setVisible(false)}
+            header={<h2>Previous Recipes</h2>}
+          >
+            <p className="text-muted m-0">
               Here you can see the recipes you have generated previously.
             </p>
             <div className="d-flex flex-column justify-content-center">
@@ -37,17 +42,44 @@ function IntroDashboard(props) {
                 return (
                   <div key={index}>
                     <Divider />
-                    <p
+                    <div
                       key={index}
-                      className="text-muted"
+                      className={`text-muted  p-2  ${styles.recipecard}`}
                       style={{ cursor: "pointer" }}
                       onClick={() => {
                         navigate("/previous-recipe/" + recipe.id);
                         setVisible(false);
                       }}
                     >
-                      {recipe.title}
-                    </p>
+                      <h5 className="text-muted">{recipe.title}</h5>
+
+                      <div className=" d-flex justify-content-between">
+                        <Rating
+                          value={recipe.rating}
+                          readOnly
+                          cancel={false}
+                          onIcon={
+                            <img
+                              src="https://primefaces.org/cdn/primereact/images/rating/custom-icon-active.png"
+                              alt="custom"
+                              width="20px"
+                              height="20px"
+                            />
+                          }
+                          offIcon={
+                            <img
+                              src="https://primefaces.org/cdn/primereact/images/rating/custom-icon.png"
+                              alt="custom"
+                              width="18px"
+                              height="18px"
+                            />
+                          }
+                        />{" "}
+                        <span className="text-muted text-end">
+                          {new Date(recipe.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 );
               })}
