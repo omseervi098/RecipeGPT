@@ -8,6 +8,67 @@ import {
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import env from "../config/environment.js";
+import { OAuth2Client } from "google-auth-library";
+const client = new OAuth2Client(env.googleClientId);
+export const googleAuth = async (req, res, next) => {
+  const { credential, client_id } = req.body;
+  const ticket = await client.verifyIdToken({
+    idToken: credential,
+    audience: client_id,
+  });
+  const payload = ticket.getPayload();
+  const { email } = payload;
+  const user = await getUserByEmail(email);
+  if (user) {
+    const loginToken = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+      },
+      env.jwtSecret,
+      {
+        expiresIn: "1d",
+      }
+    );
+    // dont send password in response
+    user.password = undefined;
+    return res.status(200).json({
+      token: loginToken,
+      user: {
+        id: user._id,
+        ...user._doc,
+      },
+    });
+  } else {
+    const username = email.split("@")[0];
+    const password = bcrypt.hashSync(email, 10);
+    const newUser = new User({
+      username,
+      email,
+      password,
+    });
+    await createUser(newUser);
+    const loginToken = jwt.sign(
+      {
+        id: newUser._id,
+        email: newUser.email,
+      },
+      env.jwtSecret,
+      {
+        expiresIn: "1d",
+      }
+    );
+    // dont send password in response
+    newUser.password = undefined;
+    return res.status(201).json({
+      token: loginToken,
+      user: {
+        id: newUser._id,
+        ...newUser._doc,
+      },
+    });
+  }
+};
 export const creatingUser = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
@@ -74,6 +135,8 @@ export const loginUser = async (req, res, next) => {
           expiresIn: "1d",
         }
       );
+      // dont send password in response
+      user.password = undefined;
       return res.status(200).json({
         token: loginToken,
         user: {
@@ -123,6 +186,8 @@ export const updateUser = async (req, res, next) => {
         },
         { new: true }
       );
+      // dont send password in response
+      updatedUser.password = undefined;
       return res.status(200).json({
         user: updatedUser,
       });
@@ -150,6 +215,8 @@ export const updateFoodPreferences = async (req, res, next) => {
         },
         { new: true }
       );
+      // dont send password in response
+      updatedUser.password = undefined;
       return res.status(200).json({
         user: updatedUser,
       });

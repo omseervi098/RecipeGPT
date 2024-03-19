@@ -8,7 +8,11 @@ export const jwtStrategy = new JwtStrategy(
   },
   async (payload, done) => {
     const userEmail = payload.email;
-    const foundUser = await getUserByEmail(userEmail);
-    done(null, foundUser);
+    try {
+      const foundUser = await getUserByEmail(userEmail);
+      done(null, foundUser);
+    } catch (error) {
+      done(error);
+    }
   }
 );
