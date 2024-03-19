@@ -1,9 +1,8 @@
 .login__page {
-  margin: auto;
   overflow: hidden;
-  min-height: 100vh;
   width: 100%;
   font-size: 18px;
+  padding: 50px 0px;
   font-family: "Poppins", sans-serif;
   background: linear-gradient(
     70deg,
@@ -21,7 +20,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .login__page {
     background: var(--secondary-color) !important;
   }
@@ -55,21 +54,14 @@
   grid-template-columns: 1fr 1fr;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
-  min-height: 70vh;
   margin: auto;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .login__page .wrapper .login__card .login__card__container {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     width: 95%;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .login__page .wrapper .login__card .login__card__container {
-    min-height: 80vh;
   }
 }
 
@@ -94,7 +86,7 @@
   width: 95%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .login__page .wrapper .login__card .login__card__container .illustration {
     display: none;
   }
@@ -163,6 +155,7 @@
   -ms-flex-align: center;
   align-items: center;
   margin: 20px auto;
+  margin-bottom: 0px;
 }
 
 .login__page
@@ -244,7 +237,25 @@
 .login__page .wrapper .login__card .login__card__container .text__content form {
   text-align: center;
 }
+.login__page input {
+  width: 100%;
+  height: 40px;
+  margin: 8px auto;
+  background-color: #eff1f7;
+  border: none;
+  outline: none;
 
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #c2c1c1;
+  font-weight: 400;
+  border-radius: 30px;
+}
+@media screen and (max-width: 575px) {
+  .login__page input {
+    padding: 20px 10px !important;
+  }
+}
 .login__page
   .wrapper
   .login__card

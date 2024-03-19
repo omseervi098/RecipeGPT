@@ -1,29 +1,24 @@
 import React from "react";
-//imoprting components
-//importing styles
-import "./login.css";
-//importing link from react router
+import styles from "./login.module.css";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import LoginImg from "../../asset/images/login.svg";
 import Field from "../../components/FieldForm/FieldForm";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { validateLogin } from "../../utils/validation";
 import { useAuth } from "../../context/authcontext";
 import Footer from "../../components/footer/footer";
-
-//login component
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 const Login = () => {
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
-  //rendering errors
   const renderError = ({ error, touched }) => {
     if (touched && error) {
       return <div className="header">{error}</div>;
     }
   };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -38,25 +33,28 @@ const Login = () => {
       toast.error(e.message);
     }
   };
-  const loginWithGoogle = () => {};
+
   return (
     <>
-      <div className="login__page">
-        <div className="wrapper ">
-          <div className="login__card ">
-            <div className="login__card__container">
-              <div className="illustration">
+      <div className={styles.login__page}>
+        <div className={`${styles.wrapper} `}>
+          <div className={styles.login__card}>
+            <div className={styles.login__card__container}>
+              <div className={styles.illustration}>
                 <img src={LoginImg} alt="login" />
               </div>
-              <div className="text__content">
-                <div className="social__media w-100 ">
-                  <div
-                    className="main__button px-3"
-                    onClick={() => loginWithGoogle()}
-                  >
-                    <FontAwesomeIcon icon={faGoogle} size={"2x"} />{" "}
-                    &nbsp;Continue with Google
-                  </div>
+              <div className={styles.text__content}>
+                <div className={`${styles.social__media} w-100 `}>
+                  <GoogleLogin
+                    onSuccess={(response) => {
+                      googleLogin(response);
+                    }}
+                    onError={(error) => {
+                      toast.error("Login Failed");
+                    }}
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                    useOneTap
+                  />
                 </div>
                 <p>or use your email account:</p>
                 <form onSubmit={handleLogin} className="">
@@ -74,14 +72,17 @@ const Login = () => {
                     type="password"
                     source={faKey}
                   />
-                  <Link className="forgot__password " to="/forget-password">
+                  <Link
+                    className={`${styles.forgot__password} `}
+                    to="/forget-password"
+                  >
                     Forgot your password?
                   </Link>
                   <button className="main__button mx-auto px-3">Login</button>
                 </form>
-                <div className="not__a__member mt-0">
+                <div className={`${styles.not__a__member} mt-0`}>
                   <p>Not a member?</p>
-                  <Link to="/signup" className="sign__up__now">
+                  <Link to="/signup" className={styles.sign__up__now}>
                     Signup now
                   </Link>
                 </div>

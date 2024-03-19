@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useReducer } from "react";
 import axios from "axios";
+import { googleLogout } from "@react-oauth/google";
 // Action Types
 const SET_USER = "SET_USER";
 const LOGOUT = "LOGOUT";
@@ -57,6 +58,8 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       if (err.response) {
         throw new Error(err.response.data.message);
+      } else {
+        throw new Error("Network Error");
       }
     }
   };
@@ -73,6 +76,8 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       if (err.response) {
         throw new Error(err.response.data.message);
+      } else {
+        throw new Error("Network Error");
       }
     }
   };
@@ -81,9 +86,23 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    googleLogout();
     dispatch({ type: LOGOUT });
   };
-
+  //google login
+  const googleLogin = async (props) => {
+    try {
+      const url =
+        process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/google/auth";
+      const response = await axios.post(url, props);
+      const { token, user } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      dispatch({ type: SET_USER, payload: user });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // isAuthenticated Function
   const isAuthenticated = () => {
     return state.isLoggedIn;
@@ -159,6 +178,7 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated,
         updateUser,
         updateFoodPreferences,
+        googleLogin,
       }}
     >
       {children}

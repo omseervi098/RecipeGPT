@@ -12,7 +12,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 function NavBar(props) {
   const { width } = props;
-  console.log(width);
   const { isAuthenticated, user, logout } = useAuth();
   const [visible, setVisible] = React.useState(false);
   return (

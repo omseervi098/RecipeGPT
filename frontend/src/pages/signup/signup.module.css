@@ -1,7 +1,7 @@
 .sign__up__page {
   margin: auto;
   overflow: hidden;
-  min-height: 100vh;
+  padding: 50px 0;
   width: 100%;
   font-size: 18px;
   font-family: "Poppins", sans-serif;
@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .sign__up__page {
     background: var(--secondary-color);
   }
@@ -55,11 +55,11 @@
   grid-template-columns: 1fr 1fr;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
-  min-height: 70vh;
+  min-height: auto;
   margin: auto;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .sign__up__page .wrapper .sign__up__card .sign__up__card__container {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
@@ -98,7 +98,7 @@
   width: 90%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .sign__up__page
     .wrapper
     .sign__up__card
@@ -113,6 +113,7 @@
   .sign__up__card
   .sign__up__card__container
   .text__content {
+  height: 100%;
   position: relative;
   -ms-grid-column: 1;
   grid-column-start: 1;
@@ -121,20 +122,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  width: 95%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   .sign__up__page
     .wrapper
     .sign__up__card
@@ -202,13 +195,7 @@
 }
 
 @media screen and (max-width: 1100px) {
-  .sign__up__page
-    .wrapper
-    .sign__up__card
-    .sign__up__card__container
-    .text__content
-    form
-    .input__container {
+  .sign__up__page .input__container {
     width: 90%;
   }
 }
@@ -240,26 +227,24 @@
   color: #ccc !important;
 }
 
-.sign__up__page
-  .wrapper
-  .sign__up__card
-  .sign__up__card__container
-  .text__content
-  form
-  .input__container
-  input {
+.sign__up__page input {
   width: 100%;
   height: 40px;
   margin: 8px auto;
   background-color: #eff1f7;
   border: none;
   outline: none;
-  padding: 30px 60px;
+
   font-size: 18px;
   font-family: "Poppins", sans-serif;
   border: 1px solid #c2c1c1;
   font-weight: 400;
   border-radius: 30px;
+}
+@media screen and (max-width: 575px) {
+  .sign__up__page input {
+    padding: 20px 10px !important;
+  }
 }
 
 .sign__up__page

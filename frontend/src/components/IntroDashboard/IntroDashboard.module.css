@@ -1,4 +1,5 @@
-.recipecard:hover {
+.recipecard:hover,
+.recipecard:focus {
   background-color: #cbf5f2;
   border-radius: 10px;
   margin: 2px;

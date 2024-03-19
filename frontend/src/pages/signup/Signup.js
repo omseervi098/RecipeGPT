@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 //importing styles
-import "./signup.css";
+import styles from "./signup.module.css";
 //importing link from react router
 import { Link, redirect, useNavigate } from "react-router-dom";
 import SignUpImg from "../../asset/images/signup.svg";
 import Field from "../../components/FieldForm/FieldForm";
-import {
-  faGoogle,
-  faKeybase,
-  faKeycdn,
-} from "@fortawesome/free-brands-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { validateSignup } from "../../utils/validation";
@@ -45,21 +41,21 @@ const SignUp = () => {
   };
   return (
     <>
-      <div className="sign__up__page">
-        <div className="wrapper ">
-          <div className="sign__up__card ">
-            <div className="sign__up__card__container">
-              <div className="illustration">
+      <div className={styles.sign__up__page}>
+        <div className={`${styles.wrapper} `}>
+          <div className={styles.sign__up__card}>
+            <div className={styles.sign__up__card__container}>
+              <div className={styles.illustration}>
                 <img src={SignUpImg} alt="signup" className="img-fluid" />
               </div>
-              <div className="text__content mt-4 ">
-                <div className="social__media mb-2">
+              <div className={`${styles.text__content} mt-4 `}>
+                <div className={`$${styles.social__media} mb-2 px-3 px-sm-5`}>
                   <div
-                    className="main__button px-3"
+                    className={`main__button px-2 px-md-3 `}
                     onClick={() => loginWithGoogle()}
                   >
-                    <FontAwesomeIcon icon={faGoogle} size={"2x"} />{" "}
-                    &nbsp;Continue with Google
+                    <FontAwesomeIcon icon={faGoogle} size={"2x"} /> &nbsp;
+                    <span>Continue with Google</span>
                   </div>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -69,6 +65,7 @@ const SignUp = () => {
                     placeholder="Username"
                     type="text"
                     source={faUser}
+                    className={styles.input__field}
                   />
                   <Field
                     name="email"
@@ -85,13 +82,13 @@ const SignUp = () => {
                     source={faKey}
                   />
 
-                  <button className="main__button mb-0 mt-2 mx-auto px-4">
+                  <button className={`main__button mb-0 mt-2 mx-auto px-4`}>
                     Sign Up
                   </button>
                 </form>
-                <div className="already__have__account mt-0">
+                <div className={`${styles.already__have__account} mt-0`}>
                   <p>Already have an account?</p>
-                  <Link to="/login" className="login__now">
+                  <Link to="/login" className={styles.login__now}>
                     Login
                   </Link>
                 </div>

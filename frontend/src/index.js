@@ -6,18 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/authcontext";
 import { RecipeProvider } from "./context/recipecontext";
 import { PrimeReactProvider } from "primereact/api";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <RecipeProvider>
-        <PrimeReactProvider>
-          <App />
-        </PrimeReactProvider>
-      </RecipeProvider>
-    </AuthProvider>
+    <GoogleOAuthProvider clientId="196314351017-uuvqotc854ht9q4n8ck4frhua9028sta.apps.googleusercontent.com">
+      <AuthProvider>
+        <RecipeProvider>
+          <PrimeReactProvider>
+            <App />
+          </PrimeReactProvider>
+        </RecipeProvider>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
 
