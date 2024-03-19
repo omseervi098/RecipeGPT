@@ -143,7 +143,7 @@ const Profile = () => {
             <h2 className="text-center">Food Preferences</h2>
           </div>
           <div className="col-md-8 mt-3">
-            <EditableFieldForm
+            {/* <EditableFieldForm
               value={foodPreferences.levelOfCooking}
               handleChange={handleFoodPreferencesChange}
               label={"Level of Cooking"}
@@ -162,7 +162,7 @@ const Profile = () => {
               className={"nationalitydropdown"}
               placeholder={"Select Calories"}
               options={["1000-1500", "1500-2000", "2000-2500", "2500-3000"]}
-            />
+            /> */}
             <div className="mt-3">
               <h4 className="fw-bold">Diet Preference </h4>
               <p className="text-muted">
@@ -189,7 +189,7 @@ const Profile = () => {
                 name={"allergies"}
               />
             </div>
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <h4 className="fw-bold">Favourite Ingredients </h4>
               <p className="text-muted">
                 Do you have any favourite ingredients? Add them here to avoid
@@ -200,7 +200,7 @@ const Profile = () => {
                 handleChange={handleFoodPreferencesChange}
                 name={"favouriteIngredients"}
               />
-            </div>
+            </div> */}
             <div className="mt-3 text-center d-flex justify-content-center">
               <button
                 className="main__button px-3 px-sm-5"

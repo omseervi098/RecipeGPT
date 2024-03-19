@@ -6,3 +6,11 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
+
+.recipecard.active {
+  background-color: #cbf5f2;
+  border-radius: 10px;
+  border: 2px solid #00bfa6;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}

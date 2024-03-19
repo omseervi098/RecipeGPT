@@ -162,6 +162,7 @@ export default function PreviousRecipe() {
                     <div className="d-flex justify-content-center">
                       <Rating
                         value={ratingValue}
+                        cancel={false}
                         onIcon={
                           <img
                             src="https://primefaces.org/cdn/primereact/images/rating/custom-icon-active.png"

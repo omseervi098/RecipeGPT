@@ -46,11 +46,16 @@ export const RecipeContext = createContext();
 // RecipeContext Provider
 export const RecipeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(recipeReducer, initialState);
-  const getRecipe = async (instancedetails) => {
+  const getRecipe = async ({ user, instancedetails, previous5Recipes }) => {
+    console.log(user, instancedetails, previous5Recipes);
     try {
       const url = process.env.REACT_APP_FLASK_URL + "/get";
       try {
-        const response = await axios.post(url, instancedetails);
+        const response = await axios.post(url, {
+          user: user,
+          instancedetails: instancedetails,
+          previous5Recipes: previous5Recipes,
+        });
         const recipe = response.data;
         if (recipe !== "No recipe found") {
           // Add Unique Key to Each Recipe
@@ -125,16 +130,24 @@ export const RecipeProvider = ({ children }) => {
           },
         }
       );
-      console.log(response.data.data.recipes);
-
+      //store the previous recipes on local storage
+      localStorage.setItem(
+        "previousRecipes",
+        JSON.stringify(response.data.data.recipes)
+      );
       dispatch({
         type: SET_PREVIOUS_RECIPES,
         payload: response.data.data.recipes,
       });
     } catch (err) {
-      console.log(err);
+      if (err.response) {
+        throw new Error(err.response.data.message);
+      } else {
+        throw new Error("Network Error");
+      }
     }
   };
+
   return (
     <RecipeContext.Provider
       value={{

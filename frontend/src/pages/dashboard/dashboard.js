@@ -13,7 +13,14 @@ import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 const Dashboard = (props) => {
   const { user } = useAuth();
-  const { recipe, getRecipe, getInstanceDetails, storeRecipe } = useRecipe();
+  const {
+    recipe,
+    previousRecipes,
+    getRecipe,
+    getAllRecipes,
+    getInstanceDetails,
+    storeRecipe,
+  } = useRecipe();
   const navigate = useNavigate();
   const [instanceDetails, setInstanceDetails] = React.useState({
     ingredients: [],
@@ -23,6 +30,9 @@ const Dashboard = (props) => {
   });
   const [result, setResult] = React.useState(null);
   const [visible, setVisible] = React.useState(false);
+  useEffect(() => {
+    getAllRecipes(user);
+  }, []);
   const handleChange = ({ name, value }) => {
     setInstanceDetails({ ...instanceDetails, [name]: value });
   };
@@ -42,8 +52,27 @@ const Dashboard = (props) => {
       diet_type: user.foodPreferences.dietPreference,
       allergies: allergies,
     };
+    console.log(previousRecipes.length);
+    if (previousRecipes.length === 0) {
+      // previousRecipes = JSON.parse(localStorage.getItem("previousRecipes"));
+    }
+    // loop through previous recipes and check if recipe is rated and collect 5 recipes
+    const ratedRecipes = previousRecipes.filter((recipe) => recipe.rating);
     try {
-      const recipe = await getRecipe(instanceDetail);
+      let previous5Recipes = [];
+      if (ratedRecipes.length > 5) {
+        //if rated recipes are more than 5 then get 5 recipes from the rated recipes
+        previous5Recipes = ratedRecipes.slice(0, 5);
+      } else {
+        //if rated recipes are less than 5 then get all the rated recipes
+        previous5Recipes = ratedRecipes;
+      }
+      console.log("previous5Recipes", previous5Recipes);
+      const recipe = await getRecipe({
+        user: user,
+        instancedetails: instanceDetail,
+        previous5Recipes: previous5Recipes,
+      });
       if (
         recipe === "No recipe found" ||
         recipe === null ||
@@ -65,6 +94,7 @@ const Dashboard = (props) => {
   };
 
   const [loading, setLoading] = React.useState(false);
+
   return (
     <div className="dashboard py-5">
       <div className="container pb-5 pt-3">
@@ -85,7 +115,7 @@ const Dashboard = (props) => {
                   name={"ingredients"}
                 />
               </div>
-              <div className="py-3 ">
+              {/* <div className="py-3 ">
                 <h4 className="fw-bold mb-3">How much time do you have? </h4>
                 <div className="d-flex flex-column gap-2 justify-content-center align-items-center">
                   <h4 className="fw-bold">
@@ -108,7 +138,7 @@ const Dashboard = (props) => {
                     min={5}
                   />
                 </div>
-              </div>
+              </div> */}
               {/* <div className="py-3">
                 <h4 className="fw-bold">What type of dish do you want? </h4>
                 <p className="text-muted">
@@ -185,20 +215,24 @@ const Dashboard = (props) => {
           <Dialog
             visible={visible}
             style={{ width: "40vw" }}
-            breakpoints={{ "960px": "80vw", "641px": "80vw" }}
+            breakpoints={{ "960px": "50vw", "641px": "90vw" }}
             onHide={() => setVisible(false)}
+            header={
+              <h4 className="fw-bold m-0">
+                <div className="text-danger">No recipe found !!! </div>
+              </h4>
+            }
           >
             <div
-              className="row justify-content-center py-0 p-0 m-0 bg-white"
+              className="row justify-content-center p-0 p-0 m-0 bg-white"
               style={{ borderRadius: "10px" }}
             >
-              <div className="col-12 col-md-8 p-0 m-0">
+              <div className="col-12 col-md-12 p-0 m-0">
                 <div className=" d-flex justify-content-center align-items-center">
-                  <h4 className="fw-bold">
-                    <div className="text-danger">
-                      No recipe found for the given details. !!!{" "}
-                    </div>
-                  </h4>
+                  <p className="text-muted">
+                    We couldn't find any recipe based on your preferences. Try
+                    changing your preferences and try again.
+                  </p>
                 </div>
               </div>
             </div>

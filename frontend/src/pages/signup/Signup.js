@@ -12,19 +12,11 @@ import { validateSignup } from "../../utils/validation";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/authcontext";
 import Footer from "../../components/footer/footer";
+import { GoogleLogin } from "@react-oauth/google";
 //importing components
 const SignUp = () => {
-  const { signup } = useAuth();
+  const { signup, googleLogin } = useAuth();
   const navigate = useNavigate();
-  //rendering errors
-  const renderError = ({ error, touched }) => {
-    if (touched && error) {
-      return <div className="header">{error}</div>;
-    }
-  };
-  const loginWithGoogle = () => {
-    console.log("google");
-  };
   const handleSubmit = async (formValues) => {
     formValues.preventDefault();
     const username = formValues.target.username.value;
@@ -50,13 +42,16 @@ const SignUp = () => {
               </div>
               <div className={`${styles.text__content} mt-4 `}>
                 <div className={`$${styles.social__media} mb-2 px-3 px-sm-5`}>
-                  <div
-                    className={`main__button px-2 px-md-3 `}
-                    onClick={() => loginWithGoogle()}
-                  >
-                    <FontAwesomeIcon icon={faGoogle} size={"2x"} /> &nbsp;
-                    <span>Continue with Google</span>
-                  </div>
+                  <GoogleLogin
+                    onSuccess={(response) => {
+                      googleLogin(response);
+                    }}
+                    onError={(error) => {
+                      toast.error("Login Failed");
+                    }}
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                    useOneTap
+                  />
                 </div>
                 <form onSubmit={handleSubmit}>
                   <Field
