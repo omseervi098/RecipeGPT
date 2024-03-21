@@ -47,7 +47,6 @@ export const RecipeContext = createContext();
 export const RecipeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(recipeReducer, initialState);
   const getRecipe = async ({ user, instancedetails, previous5Recipes }) => {
-    console.log(user, instancedetails, previous5Recipes);
     try {
       const url = process.env.REACT_APP_FLASK_URL + "/get";
       try {
@@ -78,7 +77,6 @@ export const RecipeProvider = ({ children }) => {
     dispatch({ type: SET_INSTANCE_DETAILS, payload: instancedetails });
   };
   const storeRecipe = (recipe, user, instanceDetails) => {
-    console.log("Storing Recipe", recipe, user, instanceDetails);
     const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes";
     try {
       axios.post(
@@ -100,7 +98,6 @@ export const RecipeProvider = ({ children }) => {
   };
   const rateRecipe = async (id, rating) => {
     try {
-      console.log(id, rating);
       const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes/rate";
       const response = await axios.post(
         url,
@@ -112,7 +109,6 @@ export const RecipeProvider = ({ children }) => {
         }
       );
 
-      console.log(response.data.data);
       dispatch({ type: SET_RATING, payload: response.data.data });
     } catch (err) {
       console.log(err);

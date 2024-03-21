@@ -11,6 +11,7 @@ import { useRecipe } from "../../context/recipecontext";
 import { Link, useNavigate } from "react-router-dom";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
+import { toast } from "react-toastify";
 const Dashboard = (props) => {
   const { user } = useAuth();
   const {
@@ -31,7 +32,14 @@ const Dashboard = (props) => {
   const [result, setResult] = React.useState(null);
   const [visible, setVisible] = React.useState(false);
   useEffect(() => {
-    getAllRecipes(user);
+    async function fetchData() {
+      try {
+        await getAllRecipes(user);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchData();
   }, []);
   const handleChange = ({ name, value }) => {
     setInstanceDetails({ ...instanceDetails, [name]: value });
@@ -52,10 +60,7 @@ const Dashboard = (props) => {
       diet_type: user.foodPreferences.dietPreference,
       allergies: allergies,
     };
-    console.log(previousRecipes.length);
-    if (previousRecipes.length === 0) {
-      // previousRecipes = JSON.parse(localStorage.getItem("previousRecipes"));
-    }
+
     // loop through previous recipes and check if recipe is rated and collect 5 recipes
     const ratedRecipes = previousRecipes.filter((recipe) => recipe.rating);
     try {

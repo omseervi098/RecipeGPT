@@ -43,7 +43,7 @@ function IntroDashboard(props) {
 
             <div className="d-flex flex-column justify-content-center ">
               {historyLoading && (
-                <div className="text-center" style={{ marginTop: "50%" }}>
+                <div className="text-center" style={{ marginTop: "10%" }}>
                   <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>

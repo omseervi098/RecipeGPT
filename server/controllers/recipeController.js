@@ -114,7 +114,10 @@ export const updateRecipe = async (req, res) => {
 };
 export const deleteRecipe = async (req, res) => {
   try {
+    //delete recipe
     await Recipe.findByIdAndDelete(req.params.id);
+    // remove from user array
+
     res.status(204).json({
       status: "success",
       data: null,
@@ -123,6 +126,28 @@ export const deleteRecipe = async (req, res) => {
     res.status(404).json({
       status: "fail",
       message: error,
+    });
+  }
+};
+export const deleteAllRecipes = async (req, res) => {
+  try {
+    //get id of recipes from user
+    const { user } = req.body;
+    const user1 = await User.findById(user._id);
+
+    //delete all recipes
+    await Recipe.deleteMany({ id: { $in: user1.recipes } });
+    // remove from user array
+    user1.recipes = [];
+    await user1.save({ validateBeforeSave: false });
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
     });
   }
 };

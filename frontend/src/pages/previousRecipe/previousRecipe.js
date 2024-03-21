@@ -48,9 +48,9 @@ export default function PreviousRecipe() {
     <div className="recipe py-5">
       <div className="container pb-5 pt-3">
         <IntroDashboard />
-        <div className="row justify-content-center py-4">
-          <div className="col-12 col-md-8">
-            <Card className="py-3 px-3 ">
+        <div className="row justify-content-center py-4 h-100">
+          <div className="col-12 col-md-8" style={{ maxHeight: "100%" }}>
+            <Card className="py-3 px-3 h-100">
               {recipe === "No recipe found" ? (
                 <h4 className="fw-bold">No recipe found</h4>
               ) : (
@@ -90,8 +90,11 @@ export default function PreviousRecipe() {
               )}
             </Card>
           </div>
-          <div className="col-12 d-none col-md-4 d-md-flex">
-            <Card className="py-3 px-3">
+          <div
+            className="col-12 d-none col-md-4 d-md-flex"
+            style={{ maxHeight: "100%" }}
+          >
+            <Card className="py-3 px-3 h-100">
               <h4 className="fw-bold">Requested Details</h4>
               <p className="text-muted m-0">
                 Here are the details of the request you made for the recipe.

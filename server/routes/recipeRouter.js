@@ -7,6 +7,7 @@ import {
   getRecipeById,
   rateRecipe,
   updateRecipe,
+  deleteAllRecipes,
 } from "../controllers/recipeController.js";
 const router = Router();
 router.post(
@@ -34,5 +35,10 @@ router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   deleteRecipe
+);
+router.delete(
+  "/all",
+  passport.authenticate("jwt", { session: false }),
+  deleteAllRecipes
 );
 export default router;

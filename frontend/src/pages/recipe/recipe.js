@@ -30,9 +30,9 @@ export default function Recipe() {
     <div className="recipe py-5">
       <div className="container pb-5 pt-3">
         <IntroDashboard />
-        <div className="row justify-content-center py-4">
-          <div className="col-12 col-md-8">
-            <Card className="py-3 px-3 ">
+        <div className="row justify-content-center py-4 h-100">
+          <div className="col-12 col-md-8 " style={{ maxHeight: "100%" }}>
+            <Card className="py-3 px-3 h-100">
               {recipe === "No recipe found" ? (
                 <h4 className="fw-bold">No recipe found</h4>
               ) : (
@@ -72,14 +72,17 @@ export default function Recipe() {
               )}
             </Card>
           </div>
-          <div className="col-12 d-none col-md-4 d-md-flex">
-            <Card className="py-3 px-3">
+          <div
+            className="col-12 d-none col-md-4 d-md-flex"
+            style={{ maxHeight: "100%" }}
+          >
+            <Card className="py-3 px-3 h-100">
               <h4 className="fw-bold">Requested Details</h4>
               <p className="text-muted m-0">
                 Here are the details of the request you made for the recipe.
               </p>
               <div className="py-3">
-                <p className="text-muted m-0">
+                <div className="text-muted m-0">
                   <span className="fw-bold">Ingredients: </span>
                   <div className="d-flex flex-column p-2 pb-0">
                     {instancedetails.ingredients.map((ingredient, index) => {
@@ -90,51 +93,55 @@ export default function Recipe() {
                       );
                     })}
                   </div>
-                </p>
-                <p className="text-muted m-0">
+                </div>
+                <div className="text-muted m-0">
                   <span className="fw-bold">Allergies: </span>
                   <div className="d-flex flex-column p-2 pb-0">
-                    {user.foodPreferences.allergies.map((allergy, index) => {
-                      return (
-                        <p key={index} className="px-2">
-                          {allergy.icon} {allergy.name}
-                        </p>
-                      );
-                    })}
-                  </div>
-                </p>
-                <p className="text-muted m-0">
-                  <span className="fw-bold">Favorite Ingredients: </span>
-                  <div className="d-flex flex-column p-2 pb-0">
-                    {user.foodPreferences.favouriteIngredients.map(
-                      (ingredient, index) => {
+                    {user.foodPreferences &&
+                      user.foodPreferences.allergies &&
+                      user.foodPreferences.allergies.map((allergy, index) => {
                         return (
                           <p key={index} className="px-2">
-                            {ingredient.icon} {ingredient.name}
+                            {allergy.icon} {allergy.name}
                           </p>
                         );
-                      }
-                    )}
+                      })}
                   </div>
-                </p>
+                </div>
+                <div className="text-muted m-0">
+                  <span className="fw-bold">Favorite Ingredients: </span>
+                  <div className="d-flex flex-column p-2 pb-0">
+                    {user.foodPreferences &&
+                      user.foodPreferences.favouriteIngredients &&
+                      user.foodPreferences.favouriteIngredients.map(
+                        (ingredient, index) => {
+                          return (
+                            <p key={index} className="px-2">
+                              {ingredient.icon} {ingredient.name}
+                            </p>
+                          );
+                        }
+                      )}
+                  </div>
+                </div>
                 {instancedetails.cuisine && (
-                  <p className="text-muted">
+                  <div className="text-muted">
                     <span className="fw-bold">Cuisine: </span>
                     {instancedetails.cuisine}
-                  </p>
+                  </div>
                 )}
                 {instancedetails.dishType && (
-                  <p className="text-muted">
+                  <div className="text-muted">
                     <span className="fw-bold">Dish Type: </span>
                     {instancedetails.dishType}
-                  </p>
+                  </div>
                 )}
-                <p className="text-muted">
+                <div className="text-muted">
                   <span className="fw-bold">Diet: </span>
                   {user.foodPreferences.dietPreference}
-                </p>
+                </div>
                 {ratingValue && (
-                  <p className="text-muted ">
+                  <div className="text-muted ">
                     <span className="fw-bold">Rating: </span>
                     <div className="d-flex justify-content-center">
                       <Rating
@@ -158,7 +165,7 @@ export default function Recipe() {
                         }
                       />
                     </div>
-                  </p>
+                  </div>
                 )}
               </div>
             </Card>
