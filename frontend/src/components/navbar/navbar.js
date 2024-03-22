@@ -1,5 +1,5 @@
-import React from "react";
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Navbar, Container, Nav, Button, Modal } from "react-bootstrap";
 import { Sidebar } from "primereact/sidebar";
 import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
@@ -10,10 +10,34 @@ import {
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Dialog } from "primereact/dialog";
 function NavBar(props) {
   const { width } = props;
   const { isAuthenticated, user, logout } = useAuth();
   const [visible, setVisible] = React.useState(false);
+  const [customInstallPrompt, setCustomInstallPrompt] = React.useState(null);
+  const [show, setShow] = React.useState(false);
+  const [isInstallPrompt, setIsInstallPrompt] = React.useState(false);
+  const [isInstalled, setIsInstalled] = React.useState(false);
+  useEffect(() => {
+    //Install App
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+
+      console.log("Install Prompt", e);
+      setCustomInstallPrompt(e);
+
+      if (isInstallPrompt) {
+        setIsInstallPrompt(true);
+      }
+    });
+    //check if app is installed
+    window.addEventListener("appinstalled", (evt) => {
+      console.log("RecipeGPT has been installed");
+      setIsInstalled(true);
+      setShow(false);
+    });
+  }, []);
   return (
     <Navbar
       bg="transparent box-shadow w-100"
@@ -44,9 +68,6 @@ function NavBar(props) {
                 >
                   Home
                 </Link>
-                <Link className={`m-2 ${styles.navlink}`} to="/about">
-                  About
-                </Link>
 
                 {isAuthenticated() ? (
                   <>
@@ -74,11 +95,56 @@ function NavBar(props) {
                     </Link>
                   </>
                 )}
+                {isInstalled === false && (
+                  <button
+                    className={`m-2 ${styles.navlink} bg-white text-dark btn`}
+                    onClick={() => {
+                      setShow(true);
+                    }}
+                  >
+                    Install App
+                  </button>
+                )}
               </Nav>
             </Navbar.Collapse>
           </>
         )}
       </Container>
+      <Dialog
+        visible={show}
+        onHide={() => {
+          setShow(false);
+        }}
+        breakpoints={{ "960px": "60vw", "641px": "80vw" }}
+      >
+        <div className="d-flex flex-column align-items-center">
+          <img
+            src="/logo192.png"
+            alt="logo"
+            className="img-fluid"
+            width={150}
+          />
+          <h4>RecipeGPT App</h4>
+          <p>Install RecipeGPT App on your device for better experience</p>
+          <button
+            className="btn btn-outline-info"
+            onClick={() => {
+              customInstallPrompt.prompt();
+              customInstallPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === "accepted") {
+                  console.log("User accepted the A2HS prompt");
+                } else {
+                  console.log("User dismissed the A2HS prompt");
+                }
+                setCustomInstallPrompt(null);
+              });
+            }}
+          >
+            Install
+          </button>
+        </div>
+      </Dialog>
+
       <Sidebar visible={visible} onHide={() => setVisible(false)}>
         <div
           className="d-flex flex-column justify-content-between "
@@ -93,13 +159,7 @@ function NavBar(props) {
             >
               Home
             </Link>
-            <Link
-              className={`m-2 ${styles.navlink}`}
-              to="/about"
-              onClick={() => setVisible(false)}
-            >
-              About
-            </Link>
+
             {isAuthenticated() ? (
               <>
                 <Link
@@ -155,6 +215,16 @@ function NavBar(props) {
               height={100}
             />
             <h2>RecipeGPT</h2>
+            {isInstalled === false && (
+              <button
+                className={` btn-outline-secondary text-dark btn`}
+                onClick={() => {
+                  setShow(true);
+                }}
+              >
+                Install App
+              </button>
+            )}
           </div>
         </div>
       </Sidebar>
