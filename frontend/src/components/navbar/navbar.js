@@ -18,7 +18,9 @@ function NavBar(props) {
   const [customInstallPrompt, setCustomInstallPrompt] = React.useState(null);
   const [show, setShow] = React.useState(false);
   const [isInstallPrompt, setIsInstallPrompt] = React.useState(false);
-  const [isInstalled, setIsInstalled] = React.useState(false);
+  const [isInstalled, setIsInstalled] = React.useState(
+    localStorage.getItem("isInstalled") || false
+  );
   useEffect(() => {
     //Install App
     window.addEventListener("beforeinstallprompt", (e) => {
@@ -35,6 +37,7 @@ function NavBar(props) {
     window.addEventListener("appinstalled", (evt) => {
       console.log("RecipeGPT has been installed");
       setIsInstalled(true);
+      localStorage.setItem("isInstalled", true);
       setShow(false);
     });
   }, []);
