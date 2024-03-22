@@ -3,3 +3,4 @@ dataset/
 __pycache__/
 
 df_new_emb.pkl
+.vercel
