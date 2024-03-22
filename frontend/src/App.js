@@ -23,6 +23,7 @@ import ForgetPassword from "./pages/forgetPass/forgetPass";
 import Recipe from "./pages/recipe/recipe";
 import PreviousRecipe from "./pages/previousRecipe/previousRecipe";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 config.autoAddCss = false;
 
@@ -33,6 +34,11 @@ function App() {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
     });
+    // ping server
+    axios
+      .get(process.env.REACT_APP_FLASK_URL)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }, []);
   return (
     <div className="App ">
