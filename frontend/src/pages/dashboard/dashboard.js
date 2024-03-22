@@ -192,7 +192,7 @@ const Dashboard = (props) => {
           <Dialog
             visible={true}
             style={{ width: "50vw" }}
-            breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+            breakpoints={{ "960px": "75vw", "641px": "80vw" }}
             onHide={() => setVisible(true)}
             content={({ hide }) => (
               <div

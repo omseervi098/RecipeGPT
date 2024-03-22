@@ -94,7 +94,7 @@ export default function Recipe() {
                     })}
                   </div>
                 </div>
-                <div className="text-muted m-0">
+                {/* <div className="text-muted m-0">
                   <span className="fw-bold">Allergies: </span>
                   <div className="d-flex flex-column p-2 pb-0">
                     {user.foodPreferences &&
@@ -107,8 +107,8 @@ export default function Recipe() {
                         );
                       })}
                   </div>
-                </div>
-                <div className="text-muted m-0">
+                </div> */}
+                {/* <div className="text-muted m-0">
                   <span className="fw-bold">Favorite Ingredients: </span>
                   <div className="d-flex flex-column p-2 pb-0">
                     {user.foodPreferences &&
@@ -123,7 +123,7 @@ export default function Recipe() {
                         }
                       )}
                   </div>
-                </div>
+                </div> */}
                 {instancedetails.cuisine && (
                   <div className="text-muted">
                     <span className="fw-bold">Cuisine: </span>
@@ -136,10 +136,10 @@ export default function Recipe() {
                     {instancedetails.dishType}
                   </div>
                 )}
-                <div className="text-muted">
+                {/* <div className="text-muted">
                   <span className="fw-bold">Diet: </span>
                   {user.foodPreferences.dietPreference}
-                </div>
+                </div> */}
                 {ratingValue && (
                   <div className="text-muted ">
                     <span className="fw-bold">Rating: </span>

@@ -113,7 +113,7 @@ export default function PreviousRecipe() {
                       })}
                   </div>
                 </p>
-                <p className="text-muted m-0">
+                {/* <p className="text-muted m-0">
                   <span className="fw-bold">Allergies: </span>
                   <div className="d-flex flex-column p-2 pb-0">
                     {instancedetails.allergies &&
@@ -125,8 +125,8 @@ export default function PreviousRecipe() {
                         );
                       })}
                   </div>
-                </p>
-                <p className="text-muted m-0">
+                </p> */}
+                {/* <p className="text-muted m-0">
                   <span className="fw-bold">Favorite Ingredients: </span>
                   <div className="d-flex flex-column p-2 pb-0">
                     {instancedetails.favouriteIngredients &&
@@ -140,7 +140,7 @@ export default function PreviousRecipe() {
                         }
                       )}
                   </div>
-                </p>
+                </p> */}
                 {instancedetails.cuisine && (
                   <p className="text-muted">
                     <span className="fw-bold">Cuisine: </span>
@@ -153,12 +153,12 @@ export default function PreviousRecipe() {
                     {instancedetails.dishType}
                   </p>
                 )}
-                {instancedetails.diet_type && (
+                {/* {instancedetails.diet_type && (
                   <p className="text-muted">
                     <span className="fw-bold">Diet: </span>
                     {instancedetails.diet_type}
                   </p>
-                )}
+                )} */}
                 {recipe.rating && (
                   <p className="text-muted ">
                     <span className="fw-bold">Rating: </span>
