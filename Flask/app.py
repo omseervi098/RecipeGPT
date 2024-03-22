@@ -1,30 +1,82 @@
-from flask_cors import CORS, cross_origin
-from flask import Flask, send_file, request
-from langchain_community.vectorstores import LanceDB
+from flask_cors import CORS
+from flask import Flask, request
 from langchain_openai import OpenAIEmbeddings
 from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
-
-import flask
-import os
-import pickle
-import pandas as pd
-import json
-import lancedb
+from langchain_community.vectorstores import Pinecone
+from sklearn.metrics.pairwise import cosine_similarity
+from openai import OpenAI
+import numpy as np
 app = Flask(__name__)
 CORS(app)
-with open('df_new_emb.pkl', 'rb') as file:
-    data = pickle.load(file)
-    recipe = pd.DataFrame(data)
-uri = "dataset/sample-recipe1-lancedb"
-db = lancedb.connect(uri)
-if "recipe" not in db.table_names():
-    table = db.create_table("recipe", recipe)
-else:
-    table = db.open_table("recipe")
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
-docsearch = LanceDB(connection=table, embedding=embeddings)
+pc_interface = Pinecone.from_existing_index(
+    "embedding", embedding=embeddings, namespace="ns1")
+retriever = pc_interface.as_retriever()
+client = OpenAI()
+
+
+def get_embedding(text, model="text-embedding-ada-002"):
+    return client.embeddings.create(input=text, model=model).data[0].embedding
+
+
+def convert_recipes(result):
+    title = result.split("Title: ")[1].split("Ingredients: ")[0]
+    ingredients = result.split("Ingredients: ")[1].split("Directions: ")[0]
+    directions = result.split("Directions: ")[1]
+    # convert directions to list of string
+    directions = directions.replace("[", "").replace("]", "").split(str(', "'))
+    directions = [string.replace('\n', "") for string in directions]
+    directions = [string[1:] if string.startswith(
+        '"') else string for string in directions]
+    directions = [string[:-1]
+                  if string.endswith('"') else string for string in directions]
+    # convert ingredients to list of string
+    ingredients = ingredients.replace(
+        "[", "").replace("]", "").split(str(', "'))
+    ingredients = [string.replace('\n', "") for string in ingredients]
+    ingredients = [string[1:] if string.startswith(
+        '"') else string for string in ingredients]
+    ingredients = [string[:-1]
+                   if string.endswith('"') else string for string in ingredients]
+    return {
+        'title': title,
+        'ingredients': ingredients,
+        'directions': directions
+    }
+
+
+def get_query_similarity_score(query_embed, generated_list):
+    query_similarity_scores_recipes = []
+    for i in generated_list:
+        embedding1 = np.array(i)
+        embedding2 = np.array(query_embed)
+        embedding1 = embedding1.reshape(1, -1)
+        embedding2 = embedding2.reshape(1, -1)
+        cum_sim = cosine_similarity(embedding1, embedding2)
+        query_similarity_scores_recipes.append(cum_sim)
+    return query_similarity_scores_recipes
+
+
+def get_recipe(generated_list, history_list, rating_col, query_similarity_scores_recipes):
+    weights_score = []
+    for i in range(len(generated_list)):
+        cum_sim = 0
+        c = 0
+        for j in history_list:
+            embedding1 = np.array(generated_list[i])
+            embedding2 = np.array(j)
+            embedding1 = embedding1.reshape(1, -1)
+            embedding2 = embedding2.reshape(1, -1)
+            cum_sim += rating_col[c]*cosine_similarity(embedding1, embedding2)
+            c = c+1
+        cum_sim = (cum_sim/5.0)
+        weights_score.append(cum_sim)
+    weights_score
+    print(weights_score)
+    index_of_max = weights_score.index(max(weights_score))
+    return index_of_max
 
 
 @app.route('/', methods=['GET'])
@@ -34,56 +86,56 @@ def home():
 
 @app.route('/get', methods=['POST'])
 def getresult():
-    ingredient = request.json['ingredient']
-    diet_type = request.json['diet_type']
-    allergies = request.json['allergies']
-    # Combine ingredient to string
-    template = """You are a recipe recommender system that help users to find recipe that match their preferences.
+    instanceDetail = request.json['instancedetails']
+    user = request.json['user']
+    previousRecipes = request.json['previous5Recipes']
+    ingredient = instanceDetail['ingredient']
+    diet_type = instanceDetail['diet_type']
+    allergies = instanceDetail['allergies']
+    template = """
+    You are a recipe recommender system that help users to find recipe that match their preferences.
     Use the following pieces of context to answer the question at the end.
-    User will provide the ingredients and you recommend directions for the recipe using those ingredients. I want 1 such recipes using the same ingredients
+    User will provide the ingredients and you recommend directions for the recipe using those ingredients and response must contain title, array of ingredients, array of directions only from dataset. I want 3 such recipes using the same ingredients
     {context}
-    This is what we know about the user, and you can use this information to better tune your research. You follow the bellow points strictly.
-    1) Do not recommend recipes which contains ingredients that are mentioned in Allergies list mentioned below.
-    2) Recipes recommended must be specefically within the same Category as mentioned in diet_type.
-    Allergies:""" + str(allergies) + """
-    Category: """ + diet_type[0]+"""           
     Question: {question}
     Your response:"""
-    print(template)
     PROMPT = PromptTemplate(
         template=template, input_variables=["context", "question"])
     chain_type_kwargs = {"prompt": PROMPT}
     llm = ChatOpenAI(
-        temperature=0, model_name="gpt-3.5-turbo-0613"
+        temperature=0.4, model_name="gpt-3.5-turbo-0613"
     )
-    qa = RetrievalQA.from_chain_type(llm=llm,
-                                     chain_type="stuff",
-                                     retriever=docsearch.as_retriever(),
-                                     return_source_documents=True,
-                                     chain_type_kwargs=chain_type_kwargs)
+    qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever,
+                                     return_source_documents=True, chain_type_kwargs=chain_type_kwargs)
     ingredient = ', '.join(ingredient)
     query = "Give me directions with the following ingredients: "+ingredient
-    print(query)
+    query_embed = get_embedding(str(query))
     docs = qa({'query': query})
-    # check type of docs
     print(docs['result'])
     # find title, ingredients, directions from docs['result'] string
     if docs['result'].find("Title: ") == -1 or docs['result'].find("Ingredients: ") == -1 or docs['result'].find("Directions: ") == -1:
         return "No recipe found"
-    result = docs['result']
-    title = docs['result'].split("Title: ")[1].split("Ingredients: ")[0]
-    ingredients = docs['result'].split("Ingredients: ")[
-        1].split("Directions: ")[0]
-    directions = docs['result'].split("Directions: ")[1]
-    # convert directions to list of string
-    directions = directions.replace(
-        "[", "").replace("]", "").split(str(', "'))
-    # convert ingredients to list of string
-    ingredients = ingredients.replace(
-        "[", "").replace("]", "").split(str(', "'))
+    result = str(docs['result']).strip().split("\n\n")[0:3]
+    generated_recipe = []
+    for i in result:
+        generated_recipe.append(convert_recipes(i))
+    generated_recipe_embedding = []
+    for i in generated_recipe:
+        generated_recipe_embedding.append(
+            get_embedding(str(i["title"])+str(i["directions"])))
+    historical_recipe_embedding = []
+    for i in previousRecipes:
+        historical_recipe_embedding.append(
+            get_embedding(str(i['title']+str(i['directions']))))
+    rating_col = [(recipe["rating"]-3)/2.0 for recipe in previousRecipes]
+    query_similarity_scores_recipes = get_query_similarity_score(
+        query_embed, generated_recipe_embedding)
+    idx = get_recipe(generated_recipe_embedding, historical_recipe_embedding,
+                     rating_col, query_similarity_scores_recipes)
+    print(generated_recipe[idx])
     docs = docs['source_documents']
     docs_dict = [{"page_content": doc.page_content, "metadata": {"title": doc.metadata["title"], "ingredients": doc.metadata["ingredients"],
-                                                                 "directions": doc.metadata["directions"], "NER": doc.metadata["NER"], "n_tokens": doc.metadata["n_tokens"]}} for doc in docs]
+                                                                 "directions": doc.metadata["directions"], "NER": doc.metadata["NER"]}} for doc in docs]
     docs_dict[0]["metadata"]["ingredients"] = docs_dict[0]["metadata"]["ingredients"].replace(
         "[", "").replace("]", "").replace("\"", "").split(", ")
     # Convert Directions to list of string between "[\"avocado\"" to "avocado"
@@ -93,13 +145,13 @@ def getresult():
     docs_dict[0]["metadata"]["NER"] = docs_dict[0]["metadata"]["NER"].replace(
         "[", "").replace("]", "").replace("\"", "").split(", ")
     response = {
-        "title": title,
-        "ingredients": ingredients,
-        "directions": directions,
-        "docs": docs_dict
+        "title": generated_recipe[idx]['title'],
+        "ingredients": generated_recipe[idx]['ingredients'],
+        "directions": generated_recipe[idx]['directions']
     }
+    # response="No recipe found"
     return response
 
 
 if (__name__ == '__main__'):
-    app.run()
+    app.run(debug=True)
