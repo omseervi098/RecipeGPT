@@ -22,9 +22,9 @@ def get_embedding(text, model="text-embedding-ada-002"):
 
 
 def convert_recipes(result):
-    title = result.split("Title: ")[1].split("Ingredients: ")[0]
-    ingredients = result.split("Ingredients: ")[1].split("Directions: ")[0]
-    directions = result.split("Directions: ")[1]
+    title = result.split("Title:")[1].split("Ingredients:")[0]
+    ingredients = result.split("Ingredients:")[1].split("Directions:")[0]
+    directions = result.split("Directions:")[1]
     # convert directions to list of string
     directions = directions.replace("[", "").replace("]", "").split(str(', "'))
     directions = [string.replace('\n', "") for string in directions]
@@ -95,7 +95,12 @@ def getresult():
     template = """
     You are a recipe recommender system that help users to find recipe that match their preferences.
     Use the following pieces of context to answer the question at the end.
-    User will provide the ingredients and you recommend directions for the recipe using those ingredients and response must contain title, array of ingredients, array of directions only from dataset. I want 3 such recipes using the same ingredients
+    User will provide the ingredients and you recommend directions for the recipe using those ingredients. I want 3 such recipes using the same ingredients.
+    Response of each recipe should contain the title, ingredients and directions like below:
+    Recipe 1:
+    Title: Grilled Cheese
+    Ingredients: [\"bread\", \"cheese\"]
+    Directions: [\"toast the bread\", \"melt the cheese\", \"combine the two\"]
     {context}
     Question: {question}
     Your response:"""
@@ -113,7 +118,9 @@ def getresult():
     docs = qa({'query': query})
     print(docs['result'])
     # find title, ingredients, directions from docs['result'] string
-    if docs['result'].find("Title: ") == -1 or docs['result'].find("Ingredients: ") == -1 or docs['result'].find("Directions: ") == -1:
+    print(docs['result'].find("Title: "), docs['result'].find(
+        "Ingredients: "), docs['result'].find("Directions: "))
+    if docs['result'].find("Title:") == -1 or docs['result'].find("Ingredients:") == -1 or docs['result'].find("Directions:") == -1:
         return "No recipe found"
     result = str(docs['result']).strip().split("\n\n")[0:3]
     generated_recipe = []
