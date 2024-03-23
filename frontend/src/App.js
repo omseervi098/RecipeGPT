@@ -34,6 +34,14 @@ function App() {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
     });
+    axios
+      .get(process.env.REACT_APP_FLASK_URL)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return (
     <div className="App ">
