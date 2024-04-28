@@ -175,10 +175,12 @@ def getresult():
     docs_dict[0]["metadata"]["NER"] = docs_dict[0]["metadata"]["NER"].replace(
         "[", "").replace("]", "").replace("\"", "").split(", ")
     response = {
-        "title": generated_recipe[idx]['title'],
-        "ingredients": generated_recipe[idx]['ingredients'],
-        "directions": generated_recipe[idx]['directions'],
-        "other_recipes": generated_recipe,
+        "recommended": {
+            "title": generated_recipe[idx]['title'],
+            "ingredients": generated_recipe[idx]['ingredients'],
+            "directions": generated_recipe[idx]['directions']
+        },
+        "allRecipes": generated_recipe,
         "usingCosineSimilarity": {
             "title": generated_recipe[idx1]['title'],
         }

@@ -60,7 +60,8 @@ export const RecipeProvider = ({ children }) => {
           // Add Unique Key to Each Recipe
           recipe.id = Math.random().toString(36).substr(2, 9);
         }
-        dispatch({ type: SET_RECIPE, payload: recipe });
+
+        dispatch({ type: SET_RECIPE, payload: recipe.recommended });
         return recipe;
       } catch (err) {
         if (err.response) {
