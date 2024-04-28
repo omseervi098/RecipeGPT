@@ -59,6 +59,26 @@ def get_query_similarity_score(query_embed, generated_list):
     return query_similarity_scores_recipes
 
 
+def get_recipe1(generated_list, history_list, rating_col, query_similarity_scores_recipes):
+    weights_score = []
+    for i in range(len(generated_list)):
+        cum_sim = 0
+        c = 0
+        for j in history_list:
+            embedding1 = np.array(generated_list[i])
+            embedding2 = np.array(j)
+            embedding1 = embedding1.reshape(1, -1)
+            embedding2 = embedding2.reshape(1, -1)
+            cum_sim += cosine_similarity(embedding1, embedding2)
+            c = c+1
+        cum_sim = (cum_sim/5.0)
+        weights_score.append(cum_sim)
+    weights_score
+    print(weights_score)
+    index_of_max = weights_score.index(max(weights_score))
+    return index_of_max
+
+
 def get_recipe(generated_list, history_list, rating_col, query_similarity_scores_recipes):
     weights_score = []
     for i in range(len(generated_list)):
@@ -139,6 +159,9 @@ def getresult():
         query_embed, generated_recipe_embedding)
     idx = get_recipe(generated_recipe_embedding, historical_recipe_embedding,
                      rating_col, query_similarity_scores_recipes)
+    idx1 = get_recipe1(generated_recipe_embedding, historical_recipe_embedding,
+                       rating_col, query_similarity_scores_recipes)
+    print(generated_recipe[idx1])
     print(generated_recipe[idx])
     docs = docs['source_documents']
     docs_dict = [{"page_content": doc.page_content, "metadata": {"title": doc.metadata["title"], "ingredients": doc.metadata["ingredients"],
@@ -156,6 +179,12 @@ def getresult():
         "ingredients": generated_recipe[idx]['ingredients'],
         "directions": generated_recipe[idx]['directions'],
         "other_recipes": generated_recipe,
+        "usingCosineSimilarity": {
+            "title": generated_recipe[idx1]['title'],
+            "ingredients": generated_recipe[idx1]['ingredients'],
+            "directions": generated_recipe[idx1]['directions']
+
+        }
     }
     # response="No recipe found"
     return response
