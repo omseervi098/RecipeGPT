@@ -154,11 +154,12 @@ def getresult():
     response = {
         "title": generated_recipe[idx]['title'],
         "ingredients": generated_recipe[idx]['ingredients'],
-        "directions": generated_recipe[idx]['directions']
+        "directions": generated_recipe[idx]['directions'],
+        "other_recipes": generated_recipe,
     }
     # response="No recipe found"
     return response
 
 
 if (__name__ == '__main__'):
-    app.run()
+    app.run(debug=True)
