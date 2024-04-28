@@ -181,9 +181,6 @@ def getresult():
         "other_recipes": generated_recipe,
         "usingCosineSimilarity": {
             "title": generated_recipe[idx1]['title'],
-            "ingredients": generated_recipe[idx1]['ingredients'],
-            "directions": generated_recipe[idx1]['directions']
-
         }
     }
     # response="No recipe found"
