@@ -43,6 +43,21 @@ const recipeSchema = new mongoose.Schema(
     embeddings: {
       type: Array,
     },
+    generatedRecipe: {
+      type: Array,
+    },
+    recommendedRecipes: {
+      type: Object,
+    },
+    previousRecipes: {
+      type: Array,
+    },
+    usingCosineSimilarity: {
+      type: Object,
+    },
+    metadata: {
+      type: Array,
+    },
   },
   {
     toJSON: { virtuals: true },

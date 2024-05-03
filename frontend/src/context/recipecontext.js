@@ -77,7 +77,7 @@ export const RecipeProvider = ({ children }) => {
   const getInstanceDetails = (instancedetails) => {
     dispatch({ type: SET_INSTANCE_DETAILS, payload: instancedetails });
   };
-  const storeRecipe = (recipe, user, instanceDetails) => {
+  const storeRecipe = ({ recipe, user, instanceDetails, previous5Recipes }) => {
     const url = process.env.REACT_APP_BACKEND_URL + "/api/v1/recipes";
     try {
       axios.post(
@@ -86,6 +86,7 @@ export const RecipeProvider = ({ children }) => {
           user: user,
           recipe: recipe,
           instanceDetails: instanceDetails,
+          previous5Recipes: previous5Recipes,
         },
         {
           headers: {

@@ -65,16 +65,24 @@ export const getRecipeById = async (req, res) => {
 };
 export const createRecipe = async (req, res) => {
   try {
-    const { recipe, user, instanceDetails } = req.body;
-
+    const { recipe, user, instanceDetails, previous5Recipes } = req.body;
+    console.log("recipe", recipe);
     const recipe1 = await Recipe.create({
       id: recipe.id,
-      title: recipe.title,
-      directions: recipe.directions,
-      ingredients: recipe.ingredients,
+      title: recipe.recommended.title,
+      directions: recipe.recommended.directions,
+      ingredients: recipe.recommended.ingredients,
       requestedIngredients: instanceDetails.ingredients,
-      allergies: user.foodPreferences.allergies,
-      diet_type: user.foodPreferences.dietPreference[0],
+      recommendedRecipes: recipe.recommended,
+      previousRecipes: previous5Recipes,
+      metadata: recipe.docs,
+      generatedRecipe: recipe.allRecipes,
+      usingCosineSimilarity: recipe.usingCosineSimilarity,
+      allergies: instanceDetails.allergies,
+      diet_type:
+        instanceDetails.dietPreference === null
+          ? ""
+          : instanceDetails.dietPreference,
     });
     const user1 = await User.findById(user);
     user1.recipes.push(recipe.id);

@@ -49,15 +49,23 @@ const Dashboard = (props) => {
     const ingredients = instanceDetails.ingredients.map((ingredient) => {
       return ingredient.name;
     });
-    const allergies = user.foodPreferences.allergies.map(
-      (allergy) => allergy.name
-    );
+    //check if user has any allergies
+    let allergies = [];
+    let dietPreference = null;
+    if (user.foodPreferences) {
+      if (user.foodPreferences.dietPreference)
+        dietPreference = user.foodPreferences.dietPreference;
+      if (
+        user.foodPreferences.allergies &&
+        user.foodPreferences.allergies.length > 0
+      )
+        allergies = user.foodPreferences.allergies.map(
+          (allergy) => allergy.name
+        );
+    }
     const instanceDetail = {
       ingredient: ingredients,
-      time: instanceDetails.time,
-      type: instanceDetails.type,
-      cuisinePreference: instanceDetails.cuisinePreference,
-      diet_type: user.foodPreferences.dietPreference,
+      diet_type: dietPreference,
       allergies: allergies,
     };
 
@@ -88,7 +96,7 @@ const Dashboard = (props) => {
         setVisible(true);
         return;
       }
-      await storeRecipe(recipe, user, instanceDetails);
+      await storeRecipe({ recipe, user, instanceDetails, previous5Recipes });
       await getInstanceDetails(instanceDetails);
       setResult(recipe);
       if (recipe !== "No recipe found") navigate("/recipe/" + recipe.id);
