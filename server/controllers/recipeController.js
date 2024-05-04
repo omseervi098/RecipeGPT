@@ -7,9 +7,11 @@ export const getAllRecipes = async (req, res) => {
     // search user by id
     if (user) {
       const user1 = await User.findById(user._id);
-      const recipes = await Recipe.find({ id: { $in: user1.recipes } }).sort({
-        createdAt: -1,
-      });
+
+      //return title,ingredients and directions,id and rating
+      const recipes = await Recipe.find({ id: { $in: user1.recipes } })
+        .select("title ingredients directions id rating")
+        .sort({ createdAt: -1 });
       res.status(200).json({
         status: "success",
         results: recipes.length,
