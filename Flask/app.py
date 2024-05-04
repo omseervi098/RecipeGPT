@@ -116,7 +116,7 @@ def getresult():
     You are a recipe recommender system that help users to find recipe that match their preferences. 
     Use the following pieces of context to answer the question at the end. 
     User will provide the ingredients and you recommend directions for the recipe using those ingredients. I want 3 such recipes using the same ingredients. In the output 
-    I want just the Title,Ingredients and Directions for the three recipes only. You can halluciante but I want three independant recipes.
+    I want just the Title, Ingredients and Directions for the three recipes only. You can halluciante but I want three independant recipes.
     {context}
     Question: {question}
     Your response:"""
