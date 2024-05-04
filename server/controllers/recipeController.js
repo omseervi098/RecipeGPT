@@ -105,15 +105,16 @@ export const createRecipe = async (req, res) => {
 };
 export const updateRecipe = async (req, res) => {
   try {
-    const recipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    res.status(200).json({
+    const { userid } = req.body;
+    const user = await User.findById(userid);
+    //delete all recipes
+    await Recipe.deleteMany({ id: { $in: user.recipes } });
+    // remove from user array
+    user.recipes = [];
+    await user.save({ validateBeforeSave: false });
+    res.status(204).json({
       status: "success",
-      data: {
-        recipe,
-      },
+      data: null,
     });
   } catch (error) {
     res.status(404).json({

@@ -30,7 +30,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   createRecipe
 );
-router.put("/", passport.authenticate("jwt", { session: false }), updateRecipe);
+router.post("/update", updateRecipe);
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
