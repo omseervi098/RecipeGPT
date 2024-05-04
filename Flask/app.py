@@ -113,14 +113,10 @@ def getresult():
     diet_type = instanceDetail['diet_type']
     allergies = instanceDetail['allergies']
     template = """
-    You are a recipe recommender system that help users to find recipe that match their preferences.
-    Use the following pieces of context to answer the question at the end.
-    User will provide the ingredients and you recommend directions for the recipe using those ingredients. I want 3 such recipes using the same ingredients.
-    Response of each recipe should contain the title, ingredients and directions like below:
-    Recipe 1:
-    Title: Grilled Cheese
-    Ingredients: [\"bread\", \"cheese\"]
-    Directions: [\"toast the bread\", \"melt the cheese\", \"combine the two\"]
+    You are a recipe recommender system that help users to find recipe that match their preferences. 
+    Use the following pieces of context to answer the question at the end. 
+    User will provide the ingredients and you recommend directions for the recipe using those ingredients. I want 3 such recipes using the same ingredients. In the output 
+    I want just the Title,Ingredients and Directions for the three recipes only. You can halluciante but I want three independant recipes.
     {context}
     Question: {question}
     Your response:"""
@@ -128,7 +124,7 @@ def getresult():
         template=template, input_variables=["context", "question"])
     chain_type_kwargs = {"prompt": PROMPT}
     llm = ChatOpenAI(
-        temperature=0.4, model_name="gpt-3.5-turbo-0613"
+        temperature=0.4, model_name="gpt-4"
     )
     qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever,
                                      return_source_documents=True, chain_type_kwargs=chain_type_kwargs)
