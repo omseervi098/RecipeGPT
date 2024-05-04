@@ -79,21 +79,52 @@ def get_recipe1(generated_list, history_list, rating_col, query_similarity_score
     return index_of_max
 
 
-def get_recipe(generated_list, history_list, rating_col, query_similarity_scores_recipes):
+def get_ingr(generated_list):
+    recipes_whole = []
+    whole_recipe = str(generated_list)
+    print(whole_recipe)
+    recipes_whole.append(whole_recipe)
+    recipes_ingredients = []
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Extract me just the ingredients from the recipe given below"},
+            {"role": "user", "content": recipes_whole[0]
+             }]
+    )
+    ingredients = response.choices[0].message.content.split("\n")
+    cleaned_ingredients = [ingredient.lstrip(
+        '-').strip().lower() for ingredient in ingredients]
+    recipes_ingredients.append(cleaned_ingredients)
+    return recipes_ingredients[0]
+
+
+def get_recipe(generated_list, history_list, rating_col, query_similarity_scores_recipes, allergy, generated_recipe):
     weights_score = []
     for i in range(len(generated_list)):
         cum_sim = 0
         c = 0
-        for j in history_list:
-            embedding1 = np.array(generated_list[i])
-            embedding2 = np.array(j)
-            embedding1 = embedding1.reshape(1, -1)
-            embedding2 = embedding2.reshape(1, -1)
-            cum_sim += rating_col[c]*cosine_similarity(embedding1, embedding2)
-            c = c+1
-        cum_sim = (cum_sim/5.0)
-        weights_score.append(cum_sim)
-    weights_score
+        ingr = get_ingr(generated_recipe[i])
+
+        al_not_found = True
+        for al in allergy:
+            if al.lower() in ingr:
+                cum_sim = -1
+                weights_score.append(cum_sim)
+                al_not_found = False
+                break
+        if al_not_found:
+            for j in history_list:
+                embedding1 = np.array(generated_list[i])
+                embedding2 = np.array(j)
+                embedding1 = embedding1.reshape(1, -1)
+                embedding2 = embedding2.reshape(1, -1)
+                cum_sim += rating_col[c] * \
+                    cosine_similarity(embedding1, embedding2)
+                c = c+1
+            cum_sim = (cum_sim/5.0)
+            weights_score.append(cum_sim)
     print(weights_score)
     index_of_max = weights_score.index(max(weights_score))
     return index_of_max
@@ -110,14 +141,17 @@ def getresult():
     user = request.json['user']
     previousRecipes = request.json['previous5Recipes']
     ingredient = instanceDetail['ingredient']
-    diet_type = instanceDetail['diet_type']
-    allergies = instanceDetail['allergies']
+    diet_type = instanceDetail['diet_type'][0]
+    allergies = ', '.join(instanceDetail['allergies'])
+    print(allergies, diet_type)
     template = """
     You are a recipe recommender system that help users to find recipe that match their preferences. 
     Use the following pieces of context to answer the question at the end. 
     User will provide the ingredients and you recommend directions for the recipe using those ingredients. I want 3 such recipes using the same ingredients. In the output 
     I want just the Title, Ingredients and Directions for the three recipes only. You can halluciante but I want three independant recipes.
     {context}
+    This is what we know about the user, and you can use this information to better tune your research. Out of 3 recipes give 2 recipes without allergy and 1 recipe with allergy but don't manipulate title of recipe:
+    Allergy: """ + str(allergies) + """
     Question: {question}
     Your response:"""
     PROMPT = PromptTemplate(
@@ -154,7 +188,7 @@ def getresult():
     query_similarity_scores_recipes = get_query_similarity_score(
         query_embed, generated_recipe_embedding)
     idx = get_recipe(generated_recipe_embedding, historical_recipe_embedding,
-                     rating_col, query_similarity_scores_recipes)
+                     rating_col, query_similarity_scores_recipes, allergy=allergies, generated_recipe=result)
     idx1 = get_recipe1(generated_recipe_embedding, historical_recipe_embedding,
                        rating_col, query_similarity_scores_recipes)
     print(generated_recipe[idx1])

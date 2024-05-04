@@ -13,6 +13,7 @@ import { Card, Modal } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { Rating } from "primereact/rating";
 import IntroDashboard from "../../components/IntroDashboard/IntroDashboard";
+import axios from "axios";
 
 export default function PreviousRecipe() {
   const { previousRecipes, rateRecipe } = useRecipe();
@@ -29,7 +30,21 @@ export default function PreviousRecipe() {
   const [ratingValue, setRatingValue] = React.useState(null);
   const [modalShow, setModalShow] = React.useState(false);
   useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/recipes/${params.id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data.recipe);
+        setRecipe(res.data.data.recipe);
+      })
+      .catch((err) => console.log(err));
+  }, [params.id]);
+  useEffect(() => {
     const recipe = previousRecipes.find((recipe) => recipe.id === params.id);
+
     if (recipe) {
       setRecipe(recipe);
       if (recipe.rating) {
@@ -113,19 +128,21 @@ export default function PreviousRecipe() {
                       })}
                   </div>
                 </p>
-                {/* <p className="text-muted m-0">
-                  <span className="fw-bold">Allergies: </span>
-                  <div className="d-flex flex-column p-2 pb-0">
-                    {instancedetails.allergies &&
-                      instancedetails.allergies.map((allergy, index) => {
-                        return (
-                          <p key={index} className="px-2">
-                            {allergy.icon} {allergy.name}
-                          </p>
-                        );
-                      })}
-                  </div>
-                </p> */}
+                {instancedetails.allergies && (
+                  <p className="text-muted m-0">
+                    <span className="fw-bold">Allergies: </span>
+                    <div className="d-flex flex-column p-2 pb-0">
+                      {instancedetails.allergies &&
+                        instancedetails.allergies.map((allergy, index) => {
+                          return (
+                            <p key={index} className="px-2">
+                              {allergy.icon} {allergy.name}
+                            </p>
+                          );
+                        })}
+                    </div>
+                  </p>
+                )}
                 {/* <p className="text-muted m-0">
                   <span className="fw-bold">Favorite Ingredients: </span>
                   <div className="d-flex flex-column p-2 pb-0">
@@ -153,12 +170,12 @@ export default function PreviousRecipe() {
                     {instancedetails.dishType}
                   </p>
                 )}
-                {/* {instancedetails.diet_type && (
+                {instancedetails.diet_type && (
                   <p className="text-muted">
                     <span className="fw-bold">Diet: </span>
                     {instancedetails.diet_type}
                   </p>
-                )} */}
+                )}
                 {recipe.rating && (
                   <p className="text-muted ">
                     <span className="fw-bold">Rating: </span>
@@ -208,6 +225,34 @@ export default function PreviousRecipe() {
                 <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;
                 {recipe.rating ? "Update Rating" : "Rate Recipe"}
               </Button>
+            </div>
+            <div className="d-flex flex-column justify-content-center mt-3 align-items-center">
+              <div className="text-muted mb-2"> Other Recipes </div>
+              <div className="container justify-content-center gap-2 ">
+                <div className="row justify-content-center gap-4">
+                  {recipe.generatedRecipe &&
+                    recipe.generatedRecipe.map((reci, index) => {
+                      if (reci.title !== recipe.title)
+                        return (
+                          <Card key={index} className="col-12 col-lg-5 p-3">
+                            <Card.Title>{reci.title}</Card.Title>
+                            <Card.Text>
+                              <span className="fw-bold">Ingredients: </span>
+                              <div className="d-flex flex-column p-2">
+                                {reci.ingredients.map((ingredient, index) => {
+                                  return (
+                                    <li key={index} className="px-2">
+                                      {ingredient.replace('"', "")}
+                                    </li>
+                                  );
+                                })}
+                              </div>
+                            </Card.Text>
+                          </Card>
+                        );
+                    })}
+                </div>
+              </div>
             </div>
           </div>
           <Modal show={modalShow} onHide={() => setModalShow(false)}>

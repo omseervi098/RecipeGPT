@@ -51,7 +51,7 @@ export const rateRecipe = async (req, res) => {
 };
 export const getRecipeById = async (req, res) => {
   try {
-    const recipe = await Recipe.findById(req.params.id);
+    const recipe = await Recipe.findOne({ id: req.params.id });
     res.status(200).json({
       status: "success",
       data: {

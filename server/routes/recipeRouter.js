@@ -15,11 +15,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   getAllRecipes
 );
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  getRecipeById
-);
+router.get("/:id", getRecipeById);
 router.post(
   "/rate",
   passport.authenticate("jwt", { session: false }),

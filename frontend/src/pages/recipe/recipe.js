@@ -18,7 +18,7 @@ export default function Recipe() {
   const { recipe, instancedetails, rating, previousRecipes, rateRecipe } =
     useRecipe();
   const params = useParams();
-
+  console.log(recipe);
   const { user } = useAuth();
   const navigate = useNavigate();
   // useEffect(() => {
@@ -42,29 +42,33 @@ export default function Recipe() {
                     Here is the recipe generated based on your preferences.
                   </p>
                   <div className="py-3">
-                    <h4> {recipe.title}</h4>
+                    <h4> {recipe.recommended.title}</h4>
                     <p className="text-muted">
                       <span className="fw-bold">Ingredients: </span>
                       <div className="d-flex flex-column p-2">
-                        {recipe.ingredients.map((ingredient, index) => {
-                          return (
-                            <li key={index} className="px-2">
-                              {ingredient.replace('"', "")}
-                            </li>
-                          );
-                        })}
+                        {recipe.recommended.ingredients.map(
+                          (ingredient, index) => {
+                            return (
+                              <li key={index} className="px-2">
+                                {ingredient.replace('"', "")}
+                              </li>
+                            );
+                          }
+                        )}
                       </div>
                     </p>
                     <p className="text-muted">
                       <span className="fw-bold">Directions: </span>
                       <div className="d-flex flex-column p-2">
-                        {recipe.directions.map((direction, index) => {
-                          return (
-                            <li key={index} className="px-2">
-                              {direction.replace('"', "")}
-                            </li>
-                          );
-                        })}
+                        {recipe.recommended.directions.map(
+                          (direction, index) => {
+                            return (
+                              <li key={index} className="px-2">
+                                {direction.replace('"', "")}
+                              </li>
+                            );
+                          }
+                        )}
                       </div>
                     </p>
                   </div>
@@ -94,7 +98,7 @@ export default function Recipe() {
                     })}
                   </div>
                 </div>
-                {/* <div className="text-muted m-0">
+                <div className="text-muted m-0">
                   <span className="fw-bold">Allergies: </span>
                   <div className="d-flex flex-column p-2 pb-0">
                     {user.foodPreferences &&
@@ -107,7 +111,7 @@ export default function Recipe() {
                         );
                       })}
                   </div>
-                </div> */}
+                </div>
                 {/* <div className="text-muted m-0">
                   <span className="fw-bold">Favorite Ingredients: </span>
                   <div className="d-flex flex-column p-2 pb-0">
@@ -136,10 +140,10 @@ export default function Recipe() {
                     {instancedetails.dishType}
                   </div>
                 )}
-                {/* <div className="text-muted">
+                <div className="text-muted">
                   <span className="fw-bold">Diet: </span>
                   {user.foodPreferences.dietPreference}
-                </div> */}
+                </div>
                 {ratingValue && (
                   <div className="text-muted ">
                     <span className="fw-bold">Rating: </span>
@@ -188,6 +192,34 @@ export default function Recipe() {
                 <FontAwesomeIcon icon={faThumbsUp} /> &nbsp;
                 {ratingValue ? "Update Rating" : "Rate Recipe"}
               </Button>
+            </div>
+            <div className="d-flex flex-column justify-content-center mt-3 align-items-center">
+              <div className="text-muted mb-2"> Other Recipes </div>
+              <div className="container justify-content-center gap-2 ">
+                <div className="row justify-content-center gap-4">
+                  {recipe.allRecipes &&
+                    recipe.allRecipes.map((reci, index) => {
+                      if (reci.title !== recipe.recommended.title)
+                        return (
+                          <Card key={index} className="col-12 col-lg-5 p-3">
+                            <Card.Title>{reci.title}</Card.Title>
+                            <Card.Text>
+                              <span className="fw-bold">Ingredients: </span>
+                              <div className="d-flex flex-column p-2">
+                                {reci.ingredients.map((ingredient, index) => {
+                                  return (
+                                    <li key={index} className="px-2">
+                                      {ingredient.replace('"', "")}
+                                    </li>
+                                  );
+                                })}
+                              </div>
+                            </Card.Text>
+                          </Card>
+                        );
+                    })}
+                </div>
+              </div>
             </div>
           </div>
           <Modal show={modalShow} onHide={() => setModalShow(false)}>

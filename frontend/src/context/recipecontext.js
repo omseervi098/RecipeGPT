@@ -61,7 +61,8 @@ export const RecipeProvider = ({ children }) => {
           recipe.id = Math.random().toString(36).substr(2, 9);
         }
 
-        dispatch({ type: SET_RECIPE, payload: recipe.recommended });
+        dispatch({ type: SET_RECIPE, payload: recipe });
+
         return recipe;
       } catch (err) {
         if (err.response) {
