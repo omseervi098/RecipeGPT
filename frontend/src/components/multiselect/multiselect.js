@@ -21,6 +21,15 @@ export default function MultiSelect({
           // check if it contains the search query
           return country.name.toLowerCase().includes(event.query.toLowerCase());
         });
+        //if no results found then add the search query to the list
+        if (_filteredCountries.length === 0) {
+          _filteredCountries = [
+            {
+              name: event.query,
+              icon: "🍽️",
+            },
+          ];
+        }
       }
 
       setFilteredIngredients(_filteredCountries);
@@ -53,7 +62,8 @@ export default function MultiSelect({
         selectedItemTemplate={(e) => {
           return (
             <div className="d-flex align-items-center">
-              <span className="icon">{e.icon}</span>&nbsp; <div>{e.name}</div>
+              <span className="icon">{e.icon ? e.icon : "🍽️"}</span>&nbsp;{" "}
+              <div>{e.name}</div>
             </div>
           );
         }}
