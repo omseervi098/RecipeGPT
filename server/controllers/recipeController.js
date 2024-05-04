@@ -10,7 +10,7 @@ export const getAllRecipes = async (req, res) => {
 
       //return title,ingredients and directions,id and rating
       const recipes = await Recipe.find({ id: { $in: user1.recipes } })
-        .select("title ingredients directions id rating")
+        .select("title ingredients directions id rating createdAt")
         .sort({ createdAt: -1 });
       res.status(200).json({
         status: "success",
