@@ -10,7 +10,7 @@ export default function Progressbar(props) {
     let _val = value;
 
     interval.current = setInterval(() => {
-      _val += Math.floor(Math.random() * 3) + 1;
+      _val += Math.floor(Math.random() * 2) + 1;
 
       if (props.loading || _val >= 100) {
         _val = 100;
